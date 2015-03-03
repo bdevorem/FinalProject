@@ -1,0 +1,11 @@
+Breanna DeVore-McDonald
+Prof. Scott Emrich
+CSE20212.01 Lab7
+Lab 8 Milestones
+
+1. Look into SDL and SFML/ watch tutorials (2 pts)
+2. Create a Mario class with basic functionality (3 pts)
+3. Create an emeny abstract base class (3 pts)
+4. Create 3 enemy derived classes (7 pts)
+5. Use SDL or SFML to create a Mario graphic (15 pts)
+6. Create the enemy graphics (10 pts)
