@@ -9,3 +9,11 @@ Lab 8 Milestones
 4. Create 3 enemy derived classes (7 pts)
 5. Use SDL or SFML to create a Mario graphic (15 pts)
 6. Create the enemy graphics (10 pts)
+
+
+UPDATED RUBRIC:
+
+1. Do 5/6 hours worth of tutorials. (20)
+2. Create a basic GUI with a movable character. (10)
+3. Write a lab report with an explanation about how the tutorials will help
+	with the Super Smash Bros GUI. (10)
