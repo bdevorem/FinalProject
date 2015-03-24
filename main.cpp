@@ -78,7 +78,7 @@ int main (int argc, char* args[]){//compatible with multiple platforms
 			SDL_Event e;//Event handler
 			
 			//While application is running
-			while( !quit )[
+			while( !quit ){
 				while( SDL_PollEvent( &e ) != 0 ){//Handle events on queue
 				
 					if( e.type == SDL_QUIT ){ //User requests quit
