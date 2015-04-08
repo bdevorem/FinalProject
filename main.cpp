@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "mainFunctions.h"
+#include "Sprite.h"
 using namespace std;
 
 int main (int argc, char* args[]) {//compatible with multiple platforms.
