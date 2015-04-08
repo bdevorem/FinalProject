@@ -40,6 +40,8 @@ Daughter classes:
 					//the counter will go up to 10), then jump() should be called again
 					//in the next iteration of the while loop. Once the height reaches the
 					//counter, then the counter is reset until the user hits jump again
+		- void grow() //mario gets larger in case of mushroom
+		- void shrink() //large mario shrinks in case of damage
 	
 	Enemy
 		- Enemy() //makes enemy appear on screen
@@ -53,11 +55,17 @@ Daughter classes:
 	
 	Block
 		- Block() //makes a block in a random location decided by rand
-		- bool isHit(int spritePosX, spritePosY) //send in coordinates of sprite,
+		- bool isHit(int spritePosX, int spritePosY) //send in coordinates of sprite,
 					//if the coordinates reach the block, return true
 		- void destroyBlock() // should be called in main if the previous function
 					//returned true. Makes the graphical representation of the destroyed
 					//block
+		- bool yieldMushroom() //random integer that determines whther or not block yields mushroom
+					
+	Mushroom
+		- Mushroom() //makes a mushroom, default constructor
+		- bool isHad(int spritePosX, intspritePosY) //if true, mario consumes mushroom and grows, shows mushroom gone
+		
 	
 Main functions:
 	Screen functions
