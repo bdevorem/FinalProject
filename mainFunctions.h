@@ -1,3 +1,6 @@
+#ifndef MAINFUNCTIONS_H
+#define MAINFUNCTIONS_H
+
 #include <iostream>
 #include <stdio.h>
 #include <SDL2/SDL.h>
@@ -57,3 +60,5 @@ void close() {
 	SDL_Quit();//Quit SDL subsystems
 }
 
+
+#endif

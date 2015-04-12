@@ -1,6 +1,6 @@
-//Breanna DeVore-McDonald
+//Breanna DeVore-McDonald, Nicholas JOnes, Tallis Bowers, RIley Revuvers
 //CSE 20212.01
-//Final Project test
+//Final Project
 
 
 #include <iostream>
@@ -8,6 +8,7 @@
 #include <SDL2/SDL.h>
 #include "mainFunctions.h"
 #include "Sprite.h"
+#include "Level.h"
 using namespace std;
 
 int main (int argc, char* args[]) {//compatible with multiple platforms.
@@ -26,11 +27,31 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 			//While application is running
 			while( !quit ){
 				while( SDL_PollEvent( &e ) != 0 ){//Handle events on queue
-
-					if( e.type == SDL_QUIT ){ //User requests quit
-						quit = true;
-					}
-				}
+				
+					switch(e.type){
+					
+						case SDL_QUIT: //User requests quit
+							quit = true;
+							break;
+							
+						case SDL_KEYDOWN:
+							if(e.key.keysym.sym == SDLK_LEFT){
+								//user moves left
+							}
+							if(e.key.keysym.sym == SDLK_RIGHT){
+								//user moves right
+							}
+							if(e.key.keysym.sym == SDLK_UP){
+								//user moves up
+							}
+							if(e.key.keysym.sym == SDLK_DOWN){
+								//user moves down
+							}
+							
+							break;
+					
+					}//end switch
+				}//end while
 
 				SDL_BlitSurface( gImage, NULL, gScreenSurface, NULL ); //Apply the image				
 				SDL_UpdateWindowSurface( gWindow );//Update the surface

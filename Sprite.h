@@ -7,13 +7,12 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "mainFunctions.h"
-//#include "Level.h"    ***not needed yet, will eventaully be used as a subclass
 using namespace std;
 
 #ifndef SPRITE_H
 #define SPRITE_H
 
-class Sprite() { //fix to be derived class of level
+class Sprite{ 
 
 	public:
 		Sprite(); //default constructor
