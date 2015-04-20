@@ -1,0 +1,97 @@
+
+
+Okay, so this is a possible plan I came up with regarding structure of code and what
+needs to get done.
+
+To Do:
+
+* Basic GUI with background image
+* Basic sprite moving back/forth
+* Scrolling screen when sprite reaches right edge of screen
+* Basic score
+* Floating blocks
+* Jumping sprite
+* Moving enemy
+* Reach end of level and display message to user
+  Collision of sprite and enemy -> update score and graphics (depending on type of collision)
+  Collision of sprite and blocks -> update score and graphics
+  
+The starred points are what I think should get done first, since they are relatively
+unrelated. The unstarred points are probably going to be the hardest, and should
+be done after the basics are done. I also think the starred points should be done by
+April 15th, because we have to be done with it all by April 20th.
+
+
+Possible Structure:
+
+Parent class:
+	Level
+		- void EndofLevel() //displays message to user
+
+Daughter classes:
+	Sprite
+		- Sprite() //constructor, makes sprite appear on the screen
+		- int move(char c) //send in the character the user entered to move left or right,
+					//and then update x pos. Should be called from while loop in main,
+					//returns x pos
+		- int jump() //update y pos. Since the jump is not just one cell up, there
+					//should be a counter that should be sent back to main, and if the
+					//value is less than the desired height (if the jump is 10 cells up,
+					//the counter will go up to 10), then jump() should be called again
+					//in the next iteration of the while loop. Once the height reaches the
+					//counter, then the counter is reset until the user hits jump again
+		- void grow() //mario gets larger in case of mushroom
+		- void shrink() //large mario shrinks in case of damage
+	
+	Enemy
+		- Enemy() //makes enemy appear on screen
+		- bool touchTop(int SpritePosX, int SpritePosY) //returns true when sprite hits
+					//top of enemy; send in sprite coordinates to check
+		- bool touchSide(int SpritePosX, int SpritePosY) //same, but for side of enemy
+		- virtual void moveEnemy() //moves enemy in a predetermined fashion
+		- virtual int DeadState() //determine if the enemy is dead
+		- void destroyEnemy() //if the enemy is in dead state, update the graphics
+					//to show its death
+	
+	Block
+		- Block() //makes a block in a random location decided by rand
+		- bool isHit(int spritePosX, int spritePosY) //send in coordinates of sprite,
+					//if the coordinates reach the block, return true
+		- void destroyBlock() // should be called in main if the previous function
+					//returned true. Makes the graphical representation of the destroyed
+					//block
+		- bool yieldMushroom() //random integer that determines whther or not block yields mushroom
+					
+	Mushroom
+		- Mushroom() //makes a mushroom, default constructor
+		- bool isHad(int spritePosX, intspritePosY) //if true, mario consumes mushroom and grows, shows mushroom gone
+		
+	
+Main functions:
+	Screen functions
+		- void ScrollScreen(int xpos) //send in x pos in every iteration of main
+					//while loop, and if the xpos is at the right edge, scroll the screen
+	
+	Score functions
+		- int tallyScore() //keeps track of score integer, should be called every time
+					//a function regarding killing/being killed/hitting blocks is called
+		- void dispScore(int score) //should be called directly after tallyScore() to
+					//update GUI score
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
