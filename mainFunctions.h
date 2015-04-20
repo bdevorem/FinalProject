@@ -46,7 +46,7 @@ bool loadMedia() {
 	if( gImage == NULL ){
 		success = false;
 	}
-	heroImage = SDL_LoadBMP( "Overworld.bmp" )
+	heroImage = SDL_LoadBMP( "Overworld.bmp" );
 	if( heroImage == NULL )
 		success = false;
 
