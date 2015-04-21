@@ -12,6 +12,7 @@
 using namespace std;
 
 int main (int argc, char* args[]) {//compatible with multiple platforms.
+	bool endGame = false;
 
 	if( !init() ){
 		printf( "Failed to initialize!\n" );
@@ -23,6 +24,9 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 
 			bool quit = false; //Main loop flag
 			SDL_Event e;//Event handler
+			
+			
+			
 
 			//While application is running
 			while( !quit ){
@@ -47,15 +51,21 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 							if(e.key.keysym.sym == SDLK_DOWN){
 								//user moves down
 							}
-							
 							break;
 					
 					}//end switch
+					
+					if(endGame == true) quit = true; //if the game ends (treated as 1st level for now)
+					
 				}//end while
 
 				SDL_BlitSurface( gImage, NULL, gScreenSurface, NULL ); //Apply the image				
 				SDL_UpdateWindowSurface( gWindow );//Update the surface
 			}//end while
+			
+			//display ending of level graphics
+			
+			
 		}//end inner if
 	}//end if
 
