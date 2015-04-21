@@ -11,7 +11,7 @@ class Level {
 	public:
 		Level();
 		//void EndofLevel();
-		void blocks();
+		void Blocks();
 		
 	protected:
 		bool endLevel;
