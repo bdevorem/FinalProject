@@ -7,14 +7,22 @@
 #include <iostream>
 using namespace std;
 
-class level {
+class Level {
 	public:
-		level() { endLevel = false; };
+		Level();
 		//void EndofLevel();
+		void blocks();
 		
 	protected:
 		bool endLevel;
 };
-
-
 #endif
+
+Level::Level() {
+	endLevel = false;
+
+}
+
+void Level::Blocks() {
+
+}
