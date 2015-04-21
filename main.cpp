@@ -125,6 +125,7 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 								if (sp.posY() > 295)
 									sp.setY(295);
 							}
+							heroRect.y = 295;
 
 							break;
 					
