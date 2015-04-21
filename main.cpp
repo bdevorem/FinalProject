@@ -34,6 +34,16 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 			heroSrcRect.h = 32;
 			heroSrcRect.w = 24;
 
+			SDL_Rect jumpRect;
+			jumpRect.x = 0;
+			jumpRect.y = 0;
+
+			SDL_Rect jumpSrcRect;
+			jumpSrcRect.x = 0;
+			jumpSrcRect.y = 0;
+			jumpSrcRect.h = 32;
+			jumpSrcRect.w = 32;
+
 			SDL_Rect srcRect;
 			srcRect.x = 100;
 			srcRect.y = 100;
@@ -45,6 +55,10 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 			dstRect.y = 100;
 			dstRect.h = 1000;
 			dstRect.w = 1000;
+
+			Sprite sp; //create sprite object
+
+			//Uint32 startTime = 0; //set timer up
 
 			//While application is running
 			while( !quit ){
@@ -59,19 +73,56 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 					case SDL_KEYDOWN:
 						if(e.key.keysym.sym == SDLK_LEFT){
 							//user moves left
-							if(heroRect.x > 100)
-								heroRect.x--;
+							if(heroRect.x > 100) {
+								heroRect.x -= 3;
+								jumpRect.x -= 3;
+							}
 							SDL_FillRect(gScreenSurface,NULL,0x000000);
 						}
 						if(e.key.keysym.sym == SDLK_RIGHT){
 							//user moves right
-							if(heroRect.x < 600)
-								heroRect.x++;
+							if(heroRect.x < 600) {
+								heroRect.x += 3;
+								jumpRect.x += 3;
+							}
 							SDL_FillRect(gScreenSurface,NULL,0x000000);
 						}
 						if(e.key.keysym.sym == SDLK_UP){
-							//user moves up
+							if (sp.inAir() == 0) {
+								sp.jumpUp();
+								sp.setDirection(1);
+							}
+							sp.resetTimer();
+							while (sp.inAir() == 1) {
+								if (((SDL_GetTicks() - sp.getTime()) > 225) && sp.getDirection() == 1) {
+									sp.jumpUp();
+									heroRect.y = NULL;
+									jumpRect.y = sp.posY();
+									jumpRect.x = heroRect.x;
+									SDL_FillRect(gScreenSurface,NULL,0x000000);
+									SDL_BlitSurface( gImage, &srcRect, gScreenSurface, &dstRect ); //Apply the image
+									SDL_BlitSurface( jumpImage, &jumpSrcRect, gScreenSurface, &jumpRect );
+									SDL_UpdateWindowSurface( gWindow );//Update the surface
+									sp.resetTimer();
+								} else if (((SDL_GetTicks() - sp.getTime()) > 225) && sp.getDirection() == 0) {
+									sp.jumpDown();
+									heroRect.y = NULL;
+									jumpRect.y = sp.posY();
+									jumpRect.x = heroRect.x;
+									SDL_FillRect(gScreenSurface,NULL,0x000000);
+									SDL_BlitSurface( gImage, &srcRect, gScreenSurface, &dstRect ); //Apply the image
+									SDL_BlitSurface( jumpImage, &jumpSrcRect, gScreenSurface, &jumpRect );
+									SDL_UpdateWindowSurface( gWindow );//Update the surface
+									sp.resetTimer();
+								}
+								if (sp.posY() <= 195) {
+									sp.setDirection(0);
+								}
+								if (sp.posY() > 295)
+									sp.setY(295);
+							}
 						}
+						heroRect.y = 295;
 						if(e.key.keysym.sym == SDLK_DOWN){
 							//user moves down
 						}
@@ -80,7 +131,7 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 
 					}//end switch
 				}//end while
-
+				jumpImage == NULL;
 				SDL_BlitSurface( gImage, &srcRect, gScreenSurface, &dstRect ); //Apply the image	
 				SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
 				SDL_UpdateWindowSurface( gWindow );//Update the surface
