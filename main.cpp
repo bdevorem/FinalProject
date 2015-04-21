@@ -26,13 +26,13 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 
 			SDL_Rect heroRect;
 			heroRect.x = 100;
-			heroRect.y = 290;
+			heroRect.y = 295;
 
 			SDL_Rect heroSrcRect;
-			heroSrcRect.x = 100;
-			heroSrcRect.y = 350;
-			heroSrcRect.h = 50;
-			heroSrcRect.w = 20;
+			heroSrcRect.x = 0;
+			heroSrcRect.y = 0;
+			heroSrcRect.h = 32;
+			heroSrcRect.w = 24;
 
 			SDL_Rect srcRect;
 			srcRect.x = 100;
