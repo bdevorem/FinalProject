@@ -6,8 +6,8 @@
 #include <SDL2/SDL.h>
 using namespace std;
 
-const int SCREEN_WIDTH = 600;
-const int SCREEN_HEIGHT = 385;
+const int SCREEN_WIDTH = 700;
+const int SCREEN_HEIGHT = 485;
 
 bool init(); //Starts up SDL and creates window
 bool loadMedia(); //Loads media
@@ -17,6 +17,9 @@ void close(); //Frees media and shuts down SDL
 SDL_Window* gWindow = NULL; //The window we'll be rendering to
 SDL_Surface* gScreenSurface = NULL; //The surface contained by the window
 SDL_Surface* gImage = NULL;//The image we will load and show on the screen
+SDL_Surface* heroImage = NULL; //The hero image will load
+SDL_Surface* jumpImage = NULL; //The jumping image loads
+SDL_Surface* walkImage = NULL; //The jumping image loads
 
 bool init() {
 	bool success = true;//Initialization flag
@@ -45,6 +48,15 @@ bool loadMedia() {
 	if( gImage == NULL ){
 		success = false;
 	}
+	heroImage = SDL_LoadBMP( "marionew.bmp" );
+	if( heroImage == NULL )
+		success = false;
+	jumpImage = SDL_LoadBMP( "jump.bmp" );
+	if( jumpImage == NULL )
+		success = false;
+	walkImage = SDL_LoadBMP( "walk.bmp" );
+	if( walkImage == NULL )
+		success = false;
 
 	return success;
 }
