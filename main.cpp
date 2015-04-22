@@ -48,6 +48,16 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 			jumpSrcRect.h = 32;
 			jumpSrcRect.w = 32;
 
+			SDL_Rect walkRect;
+			walkRect.x = 0;
+			walkRect.y = 0;
+
+			SDL_Rect walkSrcRect;
+			walkSrcRect.x = 0;
+			walkSrcRect.y = 0;
+			walkSrcRect.h = 30;
+			walkSrcRect.w = 26;
+
 			SDL_Rect srcRect;
 			srcRect.x = 100;
 			srcRect.y = 100;
@@ -78,6 +88,7 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 						if(e.key.keysym.sym == SDLK_LEFT){
 							//user moves left
 							if(heroRect.x > 100) {
+
 								heroRect.x -= 3;
 								jumpRect.x -= 3;
 							}
@@ -86,8 +97,16 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 						if(e.key.keysym.sym == SDLK_RIGHT){
 							//user moves right
 							if(heroRect.x < 600) {
+								walkRect.x = heroRect.x;
+								walkRect.y = heroRect.y;
+								heroRect.y = NULL;
+								SDL_FillRect(gScreenSurface,NULL,0x000000);
+								SDL_BlitSurface( gImage, &srcRect, gScreenSurface, &dstRect ); //Apply the image
+								SDL_BlitSurface( walkImage, &walkSrcRect, gScreenSurface, &walkRect );
+								SDL_UpdateWindowSurface( gWindow );//Update the surface*/
 								heroRect.x += 3;
-								jumpRect.x += 3;
+								heroRect.y = walkRect.y;
+								walkRect.x = NULL;
 							}
 							SDL_FillRect(gScreenSurface,NULL,0x000000);
 						}
@@ -98,7 +117,7 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 							}
 							sp.resetTimer();
 							while (sp.inAir() == 1) {
-								if (((SDL_GetTicks() - sp.getTime()) > 225) && sp.getDirection() == 1) {
+								if (((SDL_GetTicks() - sp.getTime()) > 110) && sp.getDirection() == 1) {
 									sp.jumpUp();
 									heroRect.y = NULL;
 									jumpRect.y = sp.posY();
@@ -108,7 +127,7 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 									SDL_BlitSurface( jumpImage, &jumpSrcRect, gScreenSurface, &jumpRect );
 									SDL_UpdateWindowSurface( gWindow );//Update the surface
 									sp.resetTimer();
-								} else if (((SDL_GetTicks() - sp.getTime()) > 225) && sp.getDirection() == 0) {
+								} else if (((SDL_GetTicks() - sp.getTime()) > 110) && sp.getDirection() == 0) {
 									sp.jumpDown();
 									heroRect.y = NULL;
 									jumpRect.y = sp.posY();

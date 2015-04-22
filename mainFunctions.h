@@ -19,6 +19,7 @@ SDL_Surface* gScreenSurface = NULL; //The surface contained by the window
 SDL_Surface* gImage = NULL;//The image we will load and show on the screen
 SDL_Surface* heroImage = NULL; //The hero image will load
 SDL_Surface* jumpImage = NULL; //The jumping image loads
+SDL_Surface* walkImage = NULL; //The jumping image loads
 
 bool init() {
 	bool success = true;//Initialization flag
@@ -52,6 +53,9 @@ bool loadMedia() {
 		success = false;
 	jumpImage = SDL_LoadBMP( "jump.bmp" );
 	if( jumpImage == NULL )
+		success = false;
+	walkImage = SDL_LoadBMP( "walk.bmp" );
+	if( walkImage == NULL )
 		success = false;
 
 	return success;
