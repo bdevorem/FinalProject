@@ -122,8 +122,19 @@ int Sprite::jump() { //jump function
 		jumpUp();
 		setDirection(1);
 	}
+
+	SDL_Event e;//Event handler
+
 		resetTimer();
 		while (inAir() == 1) {
+			if(e.type == SDL_KEYDOWN)  {
+				if(e.key.keysym.sym == SDLK_LEFT){
+					move('l');  }
+				if(e.key.keysym.sym == SDLK_RIGHT){
+					//user moves right
+					move('r');
+				}
+			}
 			if (((SDL_GetTicks() - getTime()) > 110) && getDirection() == 1) {
 				jumpUp();
 				heroRect.y = NULL;
