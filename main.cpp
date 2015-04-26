@@ -48,7 +48,8 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 							sp.setMoveVar(-1);
 						}
 						if(e.key.keysym.sym == SDLK_UP){
-							sp.setDirection(1);  }
+							if(!sp.inAir())
+								sp.setDirection(1);  }
 						if(e.key.keysym.sym == SDLK_DOWN){
 							//user moves down
 						}
