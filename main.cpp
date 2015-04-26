@@ -13,6 +13,7 @@ using namespace std;
 
 int main (int argc, char* args[]) {//compatible with multiple platforms.
 	bool endGame = false;
+	int moveVar = 0;
 
 	if( !init() ){
 		printf( "Failed to initialize!\n" );
@@ -41,24 +42,32 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 
 					case SDL_KEYDOWN:
 						if(e.key.keysym.sym == SDLK_LEFT){
-							sp.move('l');  }
+							sp.setMoveVar(1);  }
 						if(e.key.keysym.sym == SDLK_RIGHT){
 							//user moves right
-							sp.move('r');
+							sp.setMoveVar(-1);
 						}
 						if(e.key.keysym.sym == SDLK_UP){
-							sp.jump();  }
+							sp.setDirection(1);  }
 						if(e.key.keysym.sym == SDLK_DOWN){
 							//user moves down
 						}
 
 						break;
-
+						
+					case SDL_KEYUP:
+						if(e.key.keysym.sym == SDLK_LEFT)
+							sp.setMoveVar(0);
+						if(e.key.keysym.sym == SDLK_RIGHT)
+							sp.setMoveVar(0);
+						break;
 					}//end switch
-					
+
 					if(endGame == true) quit = true; //if the game ends (treated as 1st level for now)
 					
 				}//end while
+                                sp.move();
+				sp.jump();
 				sp.display();
 			}//end while
 			
