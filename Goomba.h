@@ -22,6 +22,7 @@ Goomba::Goomba(int x, int y) : Enemy(x, y) {
 } //end constructor
 
 void Goomba::moveEnemy() { //moves enemy
+} //fix this
 	
 		
 		

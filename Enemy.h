@@ -21,6 +21,8 @@ class Enemy  {
 	void checkAlive(); //checks whether or not enemy is alive
 	bool alive(); //gets whether or not the enemy is alive
 	int getHP(); //gets HP
+	void setxp(int); //sets x position
+	void setyp(int); //sets y position
   private:
     	int xpos;  // private data members for storing the location of the enemy
    	int ypos;
@@ -97,4 +99,11 @@ void Enemy::kill() { //actions when alive is set to false
 	xpos = 0; //x and y position set to (0,0)
 	ypos = 0;	//to prevent any conflict
 
+void Enemy::setxp(int point) { //sets x position to point
+	xpos = point;
+} //end function
+
+void Enemy::setyp(int point) { //sets y position to point
+	ypos = point;
+} //end function
 	
