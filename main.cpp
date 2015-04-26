@@ -6,15 +6,13 @@
 #include <iostream>
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include "mainFunctions.h"
-#include "Sprite.h"
 #include "Level.h"
+
 using namespace std;
 
 int main (int argc, char* args[]) {//compatible with multiple platforms.
-	bool endGame = false;
-	int moveVar = 0;
-
+	//bool endGame = false;
+/*
 	if( !init() ){
 		printf( "Failed to initialize!\n" );
 	} else {
@@ -27,6 +25,7 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 			SDL_Event e;//Event handler
 			
 			Sprite sp; //create sprite object
+			//Level lvl1;
 
 			//Uint32 startTime = 0; //set timer up
 
@@ -81,6 +80,10 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 	//Free resources and close SDL
 	close();
 	return 0;
+*/
+
+	Level lvl;
+	lvl.playLevel();
 }
 
 
