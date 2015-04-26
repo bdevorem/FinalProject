@@ -22,8 +22,11 @@ Goomba::Goomba(int x, int y) : Enemy(x, y) {
 } //end constructor
 
 void Goomba::moveEnemy() { //moves enemy
+	int x = getxp(); //gets initial position
 } //fix this
-	
+
+void Goomba::display() { //displays goomba
+} //figure this out
 		
 		
 
