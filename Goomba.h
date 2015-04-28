@@ -1,38 +1,66 @@
 //Goomba.h
-//nicholascjones
-
 //goomba class inherited from enemy class
 
 #include "Enemy.h"
+#include <SDL2/SDL.h>
 #ifndef GOOMBA_H
 #define GOOMBA_H
 
 class Goomba: public Enemy {
 	public:
-		Goomba(int, int); //default constructor w/ x and y position
-		void die(); //dead function
+		Goomba(); //default constructor w/ x and y position
 		void moveEnemy(); //moves enemy
+		bool isOn(int, int); //if mario is on goomba
+		
+	private:
+		SDL_Rect goombaRect;
+		SDL_Rect goombaSrcRect;
+		int x;
+		int y;
+		int width;
+		
+		
 }
 #endif
 
-Goomba::Goomba(int x, int y) : Enemy(x, y) {
-	damage(); //sets goomba's default hp to 1 rather than 2
-} //end constructor
+Goomba::Goomba() : Enemy() {
+	x = 576;
+	y = 295;
+	width = 24;
+
+} 
 
 void Goomba::moveEnemy() { //moves enemy
 
-} //fix this
+	goombaRect.x -= 1;
 
-void Goomba::display() { //displays goomba
+}
+
+bool Goomba::isOn(int xpos, int ypos) {
+
+	if(ypos == y)
+		if( xpos >= x && xpos <= x+width)
+			return true;
+			
+	return false;
+}
 
 
-} //figure this out
-
-void Goomba::die() { 
 
 
-} //figure this out
-		
-		
-		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
