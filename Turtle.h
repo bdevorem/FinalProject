@@ -84,13 +84,9 @@ int Turtle::getY() {
 }
 
 int Turtle::dead(){
+	//2 = alive, 1 = in shell, 0 = dead
 
-
-
-
-
-
-	//return !alive;
+	return alive;
 }
 
 void Turtle::setX(int a){
@@ -98,7 +94,7 @@ void Turtle::setX(int a){
 }
 
 void Turtle::setAlive(){
-	alive = false;
+	if(alive != 0) alive--; //decrease alive level by one
 }
 
 void Turtle::displayLives(){

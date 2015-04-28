@@ -39,7 +39,7 @@ class Enemy  {
 	
     
 };
-#endif
+
 
 Enemy::Enemy() { //default constructor for enemy class
 	xpos = 576;
@@ -49,6 +49,7 @@ Enemy::Enemy() { //default constructor for enemy class
 	touchSide = false;
 	hp = 2;
 }
+#endif
 	/*
 
 void Enemy::touch(int x, int y) { //if sprite is touching top of enemy
