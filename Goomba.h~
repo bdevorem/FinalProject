@@ -16,11 +16,15 @@ class Goomba: public Enemy {
 		void setX(int);
 		bool dead();
 		void setAlive();
+		void displayLives();
+		bool isHitLeft(int, int);
+		bool isHitRight(int, int);
 		
 	private:
 		int x;
 		int y;
 		int width;
+		int height;
 		bool alive = true;
 		
 		
@@ -30,7 +34,7 @@ class Goomba: public Enemy {
 Goomba::Goomba() : Enemy() {
 	x = 576;
 	y = 295;
-	width = 24;
+	width = height = 24;
 
 } 
 
@@ -71,10 +75,32 @@ void Goomba::setX(int a){
 void Goomba::setAlive(){
 	alive = false;
 
+}
+
+void Goomba::displayLives(){
+	/////////////////////////////add stuff//////////////////
 
 }
 
+bool Goomba::isHitLeft(int Xpos, int Ypos)  {
 
+	if(Xpos == x
+		if(Ypos >= y && Ypos <= y+height)
+			return true;
+
+	return false;
+
+}
+
+bool Goomba::isHitRight(int Xpos, int Ypos)  {
+
+	if(Xpos == x + width)
+		if(Ypos >= y && Ypos <= y+height)
+			return true;
+
+	return false;
+
+}
 
 
 

@@ -22,17 +22,21 @@ class Level {
 		
 	protected:
 		Sprite sp;
+		
 		int numBlocks;
 		Block blk[4];
 		SDL_Rect blockRect[4];
 		SDL_Rect blockSrcRect[4];
+		
 		int numGoombas;
 		Goomba goomba[2];
+		SDL_Rect goombaRect[2];
+		SDL_Rect goombaSrcRect[2];
+		
 		SDL_Rect srcRect;
 		SDL_Rect dstRect;
 		int mapDistMove;
-		SDL_Rect goombaRect[2];
-		SDL_Rect goombaSrcRect[2];
+		
 		
 };
 #endif
@@ -64,7 +68,7 @@ Level::Level() {
 	blk[3].setXpos(100);
 	blk[3].setYpos(210);
 
-	goomba[0].setX(540);
+	goomba[0].setX(400);
 
 	
 	
@@ -205,10 +209,24 @@ void Level::scrollScreen()  {
 
 	if(sp.getX() > 500)  {
 		mapDistMove += sp.getX() - 500;
+		
 		for(int i = 0; i < numBlocks; i++)  {
 			blk[i].setXpos(blk[i].getXpos() - sp.getX() + 500);
 		}
+		
+		for(int i = 0; i < numGoombas; i++)  {
+			goomba[i].setX(goomba[i].getX() - sp.getX() + 500);
+		}
+		
 		sp.setX(500);
 	}
 
 }
+
+
+
+
+
+
+
+
