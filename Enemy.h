@@ -1,33 +1,49 @@
 // This is a tentative sketch for the abstract enemy class.
-#include "Sprite.h"
+#include <SDL2/SDL.h>
 
 #ifndef ENEMY_H
 #define ENEMY_H
 class Enemy  {
 
   public:
-  	Enemy(int,int); // non-default constructor used because all enemies will be initialized from the same spot on the screen
-	void touch(int, int); //determines if touching in any capacity
-    	virtual void moveEnemy() = 0;  // will describe the motion of each of the enemies in derived classes
+  	Enemy(); // non-default constructor used because all enemies will be initialized from the same spot on the screen (right)
+	
+	
+	
+   virtual void moveEnemy();  //describe motion of enemies
 	virtual void die() = 0; 
+	
+	
+	
+	void touch(int, int); //determines if touching in any capacity
 	void checkDamage(); //checks whether damage is done
 	void damage(); //subtracts 1 from enemy's hp
 	void checkAlive(); //checks whether or not enemy is alive
+	
+
+
+
+
+
+
+
 
   protected:
-    	int xpos;  // private data members for storing the location of the enemy
-   	int ypos;
+   int xpos; 
+   int ypos;
 	bool alive;
 	bool touchTop;
 	bool touchSide;
 	int hp;
+	
+	
     
 }
 #endif
 
-Enemy::Enemy(int x, int y) { //default constructor for enemy class
-	xpos = x;
-	ypos = y;
+Enemy::Enemy() { //default constructor for enemy class
+	xpos = 576;
+	ypos = 295;
 	alive = true;
 	touchTop = false;
 	touchSide = false;
