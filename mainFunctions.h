@@ -57,6 +57,9 @@ bool loadMedia() {
 	walkImage = SDL_LoadBMP( "walk.bmp" );
 	if( walkImage == NULL )
 		success = false;
+	blockImage = SDL_LoadBMP( "block.bmp" );
+	if( blockImage == NULL )
+		success = false;
 
 	return success;
 }
