@@ -64,17 +64,10 @@ Level::Level() {
 	blk[3].setXpos(100);
 	blk[3].setYpos(210);
 
-	goomba[0].setX(100);
+	goomba[0].setX(540);
 
 	
-	for(int i = 0; i < numGoombas; i++)  {
-		goombaRect[i].x = goomba[i].getX();
-		goombaRect[i].y = 295;
-		goombaSrcRect[i].w = 24;
-		goombaSrcRect[i].h = 24;
-		goombaSrcRect[i].x = 0;
-		goombaSrcRect[i].y = 0;
-	}
+	
 
 }
 
@@ -161,16 +154,21 @@ void Level::display() { //displays Sprite
 	}
 	
 	for(int i = 0; i < numGoombas; i++)  {
-		SDL_BlitSurface( goombaImage, &goombaSrcRect[i], gScreenSurface, &goombaRect[i] );
-		
-		goombaRect[i].y = 295;
 		goombaRect[i].x = goomba[i].getX();
+		goombaRect[i].y = 295;
+		goombaSrcRect[i].w = 24;
+		goombaSrcRect[i].h = 24;
+		goombaSrcRect[i].x = 0;
+		goombaSrcRect[i].y = 0;
+		
 		
 		if(goomba[i].dead() == true)
 			goombaImage = NULL;
 			
 		
+		SDL_BlitSurface( goombaImage, &goombaSrcRect[i], gScreenSurface, &goombaRect[i] );
 	}
+	
 
 	SDL_UpdateWindowSurface( gWindow );//Update the surface
 }
@@ -193,7 +191,14 @@ void Level::checks()  {
 			sp.setMoveVar(0);
 	
 	}
+	
+	for(int i = 0; i < numGoombas; i++)  {
 
+		if(goomba[i].isOn(sp.getX(), sp.getY()+32) || goomba[i].isOn(sp.getX()+24, sp.getY()+32)) {
+			goomba[i].setAlive();
+		}
+
+	}
 }
 
 void Level::scrollScreen()  {

@@ -15,6 +15,7 @@ class Goomba: public Enemy {
 		int getY();
 		void setX(int);
 		bool dead();
+		void setAlive();
 		
 	private:
 		int x;
@@ -57,12 +58,18 @@ int Goomba::getY() { //gives mario's y coordinate
 }
 
 bool Goomba::dead(){
-	return alive;
+	return !alive;
 
 }
 
 void Goomba::setX(int a){
 	x = a;
+
+
+}
+
+void Goomba::setAlive(){
+	alive = false;
 
 
 }

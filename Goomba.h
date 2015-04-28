@@ -15,6 +15,8 @@ class Goomba: public Enemy {
 		int getY();
 		void setX(int);
 		bool dead();
+		void setAlive();
+		void displayLives();
 		
 	private:
 		int x;
@@ -64,6 +66,17 @@ bool Goomba::dead(){
 void Goomba::setX(int a){
 	x = a;
 
+
+}
+
+void Goomba::setAlive(){
+	alive = false;
+
+
+}
+
+void Goomba::displayLives(){
+	
 
 }
 
