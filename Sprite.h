@@ -40,6 +40,7 @@ public:
 	void setMoveVar(int);
 	int getMoveVar();
 	void resetJumpCounter();
+	bool getAliveStatus();
 
 
 private:
@@ -62,8 +63,8 @@ private:
 
 
 Sprite::Sprite() { //default constructor
-	bool alive = true;
-	bool large = false;
+	alive = true;
+	large = false;
 	moveVar = 0;
 	x = 0;
 	y = 295;
@@ -134,7 +135,7 @@ void Sprite::shrink() { //mario becomes small in case of getting a mushroom
 }
 
 void Sprite::damage() { //mario can take damage from enemy based on a position check given in main
-	if (large = true) { //tests if mario is large and can take damage
+	if (large == true) { //tests if mario is large and can take damage
 		shrink(); //makes mario small
 	} else { //if mario is small
 		die(); //mario dies
@@ -213,4 +214,8 @@ int Sprite::getMoveVar()  {
 
 void Sprite::resetJumpCounter()  {
 	jumpCounter = 0;
+}
+
+bool Sprite::getAliveStatus()  {
+	return alive;
 }

@@ -24,7 +24,8 @@ class Goomba: public Enemy {
 		void setMoveVar(int);
 		bool makeNewGoomba();
 		void setNewGoomba(bool);
-		
+		int getMoveVar();		
+
 	private:
 		int x;
 		int y;
@@ -43,7 +44,7 @@ Goomba::Goomba() : Enemy() {
 	srand(time(NULL));
 	
 	x = 576;
-	y = 295;
+	y = 302;
 	width = height = 24;
 	counter = 0;
 	moveVar = 1;
@@ -52,11 +53,18 @@ Goomba::Goomba() : Enemy() {
 
 void Goomba::moveGoomba() { //moves enemy
 
-	if(moveVar == 1){
 		counter++; //goomba is SUPER fast, so fix this without making coordinates floats
+
+	if(moveVar == 1){
+		//counter++; //goomba is SUPER fast, so fix this without making coordinates floats
 	
 		if(counter%5 == 0)
 			x -= 1;
+	}
+	else if(moveVar == -1)  {
+
+		if(counter%5 == 0)
+			x += 1;
 	}
 }
 
@@ -136,8 +144,9 @@ void Goomba::setNewGoomba(bool a){
 	newGoomba = a;
 }
 
-
-
+int Goomba::getMoveVar()  {
+	return moveVar;
+}
 
 
 
