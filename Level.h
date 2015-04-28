@@ -31,13 +31,13 @@ Level::Level() {
 
 	numBlocks = 2;
 
-	srcRect.x = 100;
-	srcRect.y = 100;
+	srcRect.x = 0;
+	srcRect.y = 0;
 	srcRect.h = 385;
 	srcRect.w = 600;
 
-	dstRect.x = 100;
-	dstRect.y = 100;
+	dstRect.x = 0;
+	dstRect.y = 0;
 	dstRect.h = 1000;
 	dstRect.w = 1000;
 

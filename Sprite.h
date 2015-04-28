@@ -64,11 +64,11 @@ Sprite::Sprite() { //default constructor
 	bool alive = true;
 	bool large = false;
 	moveVar = 0;
-	x = 100;
+	x = 0;
 	y = 295;
 	jumpCounter = 0;
 
-	heroRect.x = 100;
+	heroRect.x = 0;
 	heroRect.y = 295;
 
 	heroSrcRect.x = 0;
@@ -108,7 +108,7 @@ int Sprite::jump() { //jump function
 int Sprite::move() { //move function
 
 	if(moveVar == 1)  {
-		if(heroRect.x > 100) {
+		if(heroRect.x > 0) {
 
 			heroRect.x -= 1;
 			//jumpRect.x -= 1;
@@ -116,7 +116,7 @@ int Sprite::move() { //move function
 			SDL_FillRect(gScreenSurface,NULL,0x000000);
 	}
         else if(moveVar == -1)  {
-		if(heroRect.x < 550) {
+		if(heroRect.x < 600) {
 			heroRect.x += 1;
 			//jumpRect.x += 1;
 		}
