@@ -60,6 +60,13 @@ Level::Level() {
 	
 	goomba[0].setX(100);
 
+	/*goombaRect[0].x = 100;
+	goombaRect[0].y = 100;
+	goombaSrcRect[0].x = 0;
+	goombaSrcRect[0].y = 0;
+	goombaSrcRect[0].w = 24;
+	goombaSrcRect[0].h = 24;*/
+
 	for(int i = 0; i < numBlocks; i++)  {
 		blockRect[i].x = blk[i].getXpos();
 		blockRect[i].y = blk[i].getYpos();
@@ -161,11 +168,12 @@ void Level::display() { //displays Sprite
 		goombaRect[i].y = 295;
 		goombaRect[i].x = goomba[i].getX();
 		
-		if(goomba[i].dead() == true)
-			goombaImage = NULL;
+		if(goomba[i].dead() == true) {}
+			//goombaImage = NULL;
 			
 		
 	}
+	//SDL_BlitSurface( goombaImage, &goombaSrcRect[0], gScreenSurface, &goombaRect[0] );
 
 	SDL_UpdateWindowSurface( gWindow );//Update the surface
 }
