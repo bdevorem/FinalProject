@@ -18,7 +18,7 @@ class Turtle: public Enemy {
 		int getY();
 		void setX(int);
 		int dead();
-		void setAlive();
+		void damage();
 		void displayLives();
 		bool isHitLeft(int, int);
 		bool isHitRight(int, int);
@@ -93,7 +93,7 @@ void Turtle::setX(int a){
 	x = a;
 }
 
-void Turtle::setAlive(){
+void Turtle::damage(){
 	if(alive != 0) alive--; //decrease alive level by one
 }
 

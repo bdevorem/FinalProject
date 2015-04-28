@@ -250,8 +250,7 @@ void Level::playLevel() {
 				for(int i = 0; i < numGoombas; i++)  {
 					goomba[i].moveGoomba();
 				}
-				
-////////////////////////////				
+						
 				newTurtle = turtle[0].makeNewTurtle();
 				
 				if(newTurtle == true){
@@ -263,7 +262,7 @@ void Level::playLevel() {
 				for(int i = 0; i < numTurtles; i++)  {
 					turtle[i].moveTurtle();
 				}
-/////////////////////////////				
+						
 			}//end while
 		if(!quit)
 			usleep(2000000);
@@ -313,7 +312,6 @@ void Level::display() { //displays Sprite
 			SDL_BlitSurface( goombaImage, &goombaSrcRect[i], gScreenSurface, &goombaRect[i] );
 	}
 
-/////////////////////////////
 	for(int i = 0; i < numTurtles; i++)  {
 		turtleRect[i].x = turtle[i].getX();
 		turtleRect[i].y = 302;
@@ -329,7 +327,6 @@ void Level::display() { //displays Sprite
 			SDL_BlitSurface( turtleImage, &turtleSrcRect[i], gScreenSurface, &turtleRect[i] );
 			//if dead, no image is displayed
 	}
-/////////////////////////////
 
 	SDL_UpdateWindowSurface( gWindow );//Update the surface
 }
@@ -383,17 +380,10 @@ void Level::checksEnemy()  {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-////////////////////////////////////////////
 	for(int i = 0; i < numTurtles; i++)  {
 
 		if(turtle[i].dead() != 0 && turtle[i].isOn(sp.getX(), sp.getY()+32) || turtle[i].isOn(sp.getX()+24, sp.getY()+32)) {
-			turtle[i].setAlive();
+			turtle[i].damage();
 			sp.setDirection(1);
 		}
 		
@@ -417,16 +407,6 @@ void Level::checksEnemy()  {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-////////////////////////////////////////////
 }
 
 void Level::scrollScreen()  {
