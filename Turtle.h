@@ -10,10 +10,9 @@
 class Turtle: public Enemy {
 	public:
 		Turtle(int, int); //default constructor w/ x and y position
-		die(); //dead function
+		void die(); //dead function
 		int DeadState(); //determines dead state based on damage
 		void moveEnemy(); //moves enemy
-		void display(); //displays Turtle
 		void checkMoving(); //checks if turtle is able to move, in state
 	private:
 		bool moving; //whether it is in a moving state or not
@@ -35,13 +34,5 @@ void Turtle::moveEnemy() {
 	} //figure out
 }	
 
-void Turtle::display() { //displays turtle based on current state
-	switch (moving) {
-		case true:
-			break;
-		case false:
-			break;
-	}
-}
 
 

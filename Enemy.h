@@ -7,11 +7,9 @@ class Enemy  {
 
   public:
   	Enemy(int,int); // non-default constructor used because all enemies will be initialized from the same spot on the screen
-	void touch(Sprite); //determines if touching in any capacity
+	void touch(int, int); //determines if touching in any capacity
     	virtual void moveEnemy() = 0;  // will describe the motion of each of the enemies in derived classes
-    	virtual int DeadState() = 0;  // will be used to determine if the enemy is dead and should leave the screen or is in another state
-	void kill(); //kills enemy
-	virtual void display() = 0; //pure virtual function to draw enemy
+	virtual void die() = 0; 
 	void checkDamage(); //checks whether damage is done
 	void damage(); //subtracts 1 from enemy's hp
 	void checkAlive(); //checks whether or not enemy is alive
@@ -37,7 +35,7 @@ Enemy::Enemy(int x, int y) { //default constructor for enemy class
 }
 	
 
-void Enemy::touch(Sprite mario) { //if sprite is touching top of enemy
+void Enemy::touch(int x, int y) { //if sprite is touching top of enemy
 	mx = Sprite::mario.getX(); //get x coordinate of sprite
 	my = Sprite::mario.getY(); //get y coordinate of sprite
 	if ((xpos > mx-5) && (xpos < mx+5)) { //if within 5 horizontal pixels

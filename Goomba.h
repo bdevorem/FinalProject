@@ -10,10 +10,8 @@
 class Goomba: public Enemy {
 	public:
 		Goomba(int, int); //default constructor w/ x and y position
-		die(); //dead function
-		int DeadState(); //determines dead state based on damage
+		void die(); //dead function
 		void moveEnemy(); //moves enemy
-		void display(); //displays Goomba
 }
 #endif
 
@@ -22,11 +20,19 @@ Goomba::Goomba(int x, int y) : Enemy(x, y) {
 } //end constructor
 
 void Goomba::moveEnemy() { //moves enemy
-	int x = getxp(); //gets initial position
+
 } //fix this
 
 void Goomba::display() { //displays goomba
+
+
 } //figure this out
+
+void Goomba::die() { 
+
+
+} //figure this out
+		
 		
 		
 
