@@ -60,6 +60,9 @@ bool loadMedia() {
 	blockImage = SDL_LoadBMP( "block.bmp" );
 	if( blockImage == NULL )
 		success = false;
+	goombaImage = SDL_LoadBMP( "goomba.bmp" );
+	if( goombaImage == NULL )
+		success = false;
 
 	return success;
 }
