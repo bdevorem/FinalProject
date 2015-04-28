@@ -126,7 +126,7 @@ bool Goomba::makeNewGoomba(){
 
 	int temp = rand()%1000000;
 
-	if(temp > 999000)
+	if(temp > 999500)
 		return true;
 	else
 		return false;
