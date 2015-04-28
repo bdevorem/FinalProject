@@ -29,9 +29,10 @@ class Level {
 		SDL_Rect blockSrcRect[4];
 		
 		int numGoombas;
-		Goomba goomba[2];
-		SDL_Rect goombaRect[2];
-		SDL_Rect goombaSrcRect[2];
+		Goomba goomba[500]; //500 is temp max
+		SDL_Rect goombaRect[500];
+		SDL_Rect goombaSrcRect[500];
+		bool newGoomba;
 		
 		SDL_Rect srcRect;
 		SDL_Rect dstRect;
@@ -44,7 +45,8 @@ class Level {
 Level::Level() {
 	mapDistMove = 0;
 	numBlocks = 4;
-	numGoombas = 1;
+	numGoombas = 2;
+	newGoomba = false;
 
 	srcRect.x = 0;
 	srcRect.y = 0;
@@ -68,9 +70,9 @@ Level::Level() {
 	blk[3].setXpos(100);
 	blk[3].setYpos(210);
 
-	goomba[0].setX(400);
-
-	
+	for(int i = 0; i < 500; i++){
+		goomba[i].setX(570);//initialize all possible goombas
+	}
 	
 
 }
@@ -127,6 +129,16 @@ void Level::playLevel() {
 				scrollScreen();
 				display();
 				
+				newGoomba = goomba[0].makeNewGoomba();
+				
+				if(newGoomba == true){
+					newGoomba = false;
+					goomba[0].setNewGoomba(false);
+					numGoombas++;
+					
+				
+				}
+				
 				for(int i = 0; i < numGoombas; i++)  {
 					goomba[i].moveGoomba();
 				}
@@ -171,11 +183,8 @@ void Level::display() { //displays Sprite
 		goombaSrcRect[i].y = 0;
 		
 		
-		if(goomba[i].dead() == true)
-			goombaImage = NULL;
-			
-		
-		SDL_BlitSurface( goombaImage, &goombaSrcRect[i], gScreenSurface, &goombaRect[i] );
+		if(goomba[i].dead() == false)	
+			SDL_BlitSurface( goombaImage, &goombaSrcRect[i], gScreenSurface, &goombaRect[i] );
 	}
 	
 
@@ -210,13 +219,11 @@ void Level::checks()  {
 		if(goomba[i].isHitLeft(sp.getX()+24, sp.getY()+16) && sp.getMoveVar() == -1){
 			sp.setMoveVar(0);
 			sp.damage();
-			goomba[i].setMoveVar(0);
 		}
 		
 		if(goomba[i].isHitRight(sp.getX(), sp.getY()+16) && sp.getMoveVar() == 1){
 			sp.setMoveVar(0);
 			sp.damage();
-			goomba[i].setMoveVar(0);
 		}
 		
 	}

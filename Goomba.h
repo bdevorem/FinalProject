@@ -3,6 +3,8 @@
 
 #include "Enemy.h"
 #include <SDL2/SDL.h>
+#include <stdlib.h>
+#include <time.h>
 #ifndef GOOMBA_H
 #define GOOMBA_H
 
@@ -20,6 +22,8 @@ class Goomba: public Enemy {
 		bool isHitLeft(int, int);
 		bool isHitRight(int, int);
 		void setMoveVar(int);
+		bool makeNewGoomba();
+		void setNewGoomba(bool);
 		
 	private:
 		int x;
@@ -29,17 +33,21 @@ class Goomba: public Enemy {
 		bool alive = true;
 		int counter;
 		int moveVar;
+		bool newGoomba;
 		
 		
 };
 #endif
 
 Goomba::Goomba() : Enemy() {
+	srand(time(NULL));
+	
 	x = 576;
 	y = 295;
 	width = height = 24;
 	counter = 0;
 	moveVar = 1;
+	newGoomba = false;
 } 
 
 void Goomba::moveGoomba() { //moves enemy
@@ -114,8 +122,19 @@ void Goomba::setMoveVar(int i){
 	moveVar = i;
 }
 
+bool Goomba::makeNewGoomba(){
 
+	int temp = rand()%1000000;
 
+	if(temp > 999500)
+		return true;
+	else
+		return false;
+}
+
+void Goomba::setNewGoomba(bool a){
+	newGoomba = a;
+}
 
 
 
