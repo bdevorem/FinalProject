@@ -6,6 +6,7 @@
 #include "mainFunctions.h"
 #include <iostream>
 #include <SDL2/SDL.h>
+#include "Goomba.h"
 using namespace std;
 
 #ifndef LEVEL_H
@@ -22,18 +23,24 @@ class Level {
 	protected:
 		Sprite sp;
 		int numBlocks;
+		int numGoombas;
 		Block blk[2];
+		Goomba goomba[2];
 		SDL_Rect srcRect;
 		SDL_Rect dstRect;
 		int mapDistMove;
 		SDL_Rect blockRect[2];
 		SDL_Rect blockSrcRect[2];
+		SDL_Rect goombaRect[2];
+		SDL_Rect goombaSrcRect[2];
+		
 };
 #endif
 
 Level::Level() {
 	mapDistMove = 0;
 	numBlocks = 2;
+	numGoombas = 1;
 
 	srcRect.x = 0;
 	srcRect.y = 0;
@@ -50,6 +57,8 @@ Level::Level() {
 
 	blk[1].setXpos(200);
 	blk[1].setYpos(299);
+	
+	goomba[0].setX(100);
 
 	for(int i = 0; i < numBlocks; i++)  {
 		blockRect[i].x = blk[i].getXpos();
@@ -58,6 +67,15 @@ Level::Level() {
 		blockSrcRect[i].h = blk[i].getHeight();
 		blockSrcRect[i].x = 0;
 		blockSrcRect[i].y = 0;
+	}
+	
+	for(int i = 0; i < numGoombas; i++)  {
+		goombaRect[i].x = goomba[i].getX();
+		goombaRect[i].y = 295;
+		goombaSrcRect[i].w = 24;
+		goombaSrcRect[i].h = 24;
+		goombaSrcRect[i].x = 0;
+		goombaSrcRect[i].y = 0;
 	}
 
 }
@@ -135,6 +153,18 @@ void Level::display() { //displays Sprite
 	
 	for(int i = 0; i < numBlocks; i++)  {
 		SDL_BlitSurface( blockImage, &blockSrcRect[i], gScreenSurface, &blockRect[i] );
+	}
+	
+	for(int i = 0; i < numGoombas; i++)  {
+		SDL_BlitSurface( goombaImage, &goombaSrcRect[i], gScreenSurface, &goombaRect[i] );
+		
+		goombaRect[i].y = 295;
+		goombaRect[i].x = goomba[i].getX();
+		
+		if(goomba[i].dead() == true)
+			goombaImage = NULL;
+			
+		
 	}
 
 	SDL_UpdateWindowSurface( gWindow );//Update the surface

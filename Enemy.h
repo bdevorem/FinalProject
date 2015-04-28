@@ -8,7 +8,7 @@ class Enemy  {
   public:
   	Enemy(); // non-default constructor used because all enemies will be initialized from the same spot on the screen (right)
 	
-	
+	/*
 	
    virtual void moveEnemy();  //describe motion of enemies
 	virtual void die() = 0; 
@@ -21,7 +21,7 @@ class Enemy  {
 	void checkAlive(); //checks whether or not enemy is alive
 	
 
-
+*/
 
 
 
@@ -38,7 +38,7 @@ class Enemy  {
 	
 	
     
-}
+};
 #endif
 
 Enemy::Enemy() { //default constructor for enemy class
@@ -49,7 +49,7 @@ Enemy::Enemy() { //default constructor for enemy class
 	touchSide = false;
 	hp = 2;
 }
-	
+	/*
 
 void Enemy::touch(int x, int y) { //if sprite is touching top of enemy
 	mx = Sprite::mario.getX(); //get x coordinate of sprite
@@ -82,3 +82,5 @@ void Enemy::kill() { //actions when alive is set to false
 	xpos = 0; //x and y position set to (0,0)
 	ypos = 0;	//to prevent any conflict
 }
+
+*/

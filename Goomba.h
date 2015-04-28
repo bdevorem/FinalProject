@@ -11,16 +11,19 @@ class Goomba: public Enemy {
 		Goomba(); //default constructor w/ x and y position
 		void moveEnemy(); //moves enemy
 		bool isOn(int, int); //if mario is on goomba
+		int getX();
+		int getY();
+		void setX(int);
+		bool dead();
 		
 	private:
-		SDL_Rect goombaRect;
-		SDL_Rect goombaSrcRect;
 		int x;
 		int y;
 		int width;
+		bool alive = true;
 		
 		
-}
+};
 #endif
 
 Goomba::Goomba() : Enemy() {
@@ -32,7 +35,7 @@ Goomba::Goomba() : Enemy() {
 
 void Goomba::moveEnemy() { //moves enemy
 
-	goombaRect.x -= 1;
+	x -= 1;
 
 }
 
@@ -45,7 +48,24 @@ bool Goomba::isOn(int xpos, int ypos) {
 	return false;
 }
 
+int Goomba::getX() { //gives mario's x coordinate
+	return x;
+}
 
+int Goomba::getY() { //gives mario's y coordinate
+	return y;
+}
+
+bool Goomba::dead(){
+	return alive;
+
+}
+
+void Goomba::setX(int a){
+	x = a;
+
+
+}
 
 
 
