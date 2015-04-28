@@ -9,7 +9,7 @@
 class Goomba: public Enemy {
 	public:
 		Goomba(); //default constructor w/ x and y position
-		void moveEnemy(); //moves enemy
+		void moveGoomba(); //moves enemy
 		bool isOn(int, int); //if mario is on goomba
 		int getX();
 		int getY();
@@ -26,6 +26,7 @@ class Goomba: public Enemy {
 		int width;
 		int height;
 		bool alive = true;
+		int counter;
 		
 		
 };
@@ -35,13 +36,14 @@ Goomba::Goomba() : Enemy() {
 	x = 576;
 	y = 295;
 	width = height = 24;
-
+	counter = 0;
 } 
 
-void Goomba::moveEnemy() { //moves enemy
-
-	x -= 1;
-
+void Goomba::moveGoomba() { //moves enemy
+	counter++; //goomba is SUPER fast, so fix this without making coordinates floats
+	
+	if(counter%5 == 0)
+		x -= 1;
 }
 
 bool Goomba::isOn(int xpos, int ypos) {

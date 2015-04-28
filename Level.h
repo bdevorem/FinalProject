@@ -123,9 +123,14 @@ void Level::playLevel() {
 				}//end while
 				sp.jump();
 				checks();
-                                sp.move();
+            sp.move();
 				scrollScreen();
 				display();
+				
+				for(int i = 0; i < numGoombas; i++)  {
+					goomba[i].moveGoomba();
+				}
+				
 			}//end while
 		
 	}	} // end elses

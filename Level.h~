@@ -123,9 +123,14 @@ void Level::playLevel() {
 				}//end while
 				sp.jump();
 				checks();
-                                sp.move();
+            sp.move();
 				scrollScreen();
 				display();
+				
+				for(int i = 0; i < numGoombas; i++)  {
+					goomba[i].moveGoomba();
+				}
+				
 			}//end while
 		
 	}	} // end elses
@@ -209,10 +214,24 @@ void Level::scrollScreen()  {
 
 	if(sp.getX() > 500)  {
 		mapDistMove += sp.getX() - 500;
+		
 		for(int i = 0; i < numBlocks; i++)  {
 			blk[i].setXpos(blk[i].getXpos() - sp.getX() + 500);
 		}
+		
+		for(int i = 0; i < numGoombas; i++)  {
+			goomba[i].setX(goomba[i].getX() - sp.getX() + 500);
+		}
+		
 		sp.setX(500);
 	}
 
 }
+
+
+
+
+
+
+
+
