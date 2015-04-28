@@ -23,14 +23,14 @@ class Level {
 	protected:
 		Sprite sp;
 		int numBlocks;
+		Block blk[4];
+		SDL_Rect blockRect[4];
+		SDL_Rect blockSrcRect[4];
 		int numGoombas;
-		Block blk[2];
 		Goomba goomba[2];
 		SDL_Rect srcRect;
 		SDL_Rect dstRect;
 		int mapDistMove;
-		SDL_Rect blockRect[2];
-		SDL_Rect blockSrcRect[2];
 		SDL_Rect goombaRect[2];
 		SDL_Rect goombaSrcRect[2];
 		
@@ -39,7 +39,7 @@ class Level {
 
 Level::Level() {
 	mapDistMove = 0;
-	numBlocks = 2;
+	numBlocks = 4;
 	numGoombas = 1;
 
 	srcRect.x = 0;
@@ -52,29 +52,20 @@ Level::Level() {
 	dstRect.h = 1000;
 	dstRect.w = 1000;
 
-	blk[0].setXpos(0);
-	blk[0].setYpos(190);
+	blk[0].setXpos(40);
+	blk[0].setYpos(230);
 
-	blk[1].setXpos(200);
-	blk[1].setYpos(299);
-	
+	blk[1].setXpos(60);
+	blk[1].setYpos(210);
+
+	blk[2].setXpos(80);
+	blk[2].setYpos(210);
+
+	blk[3].setXpos(100);
+	blk[3].setYpos(210);
+
 	goomba[0].setX(100);
 
-	/*goombaRect[0].x = 100;
-	goombaRect[0].y = 100;
-	goombaSrcRect[0].x = 0;
-	goombaSrcRect[0].y = 0;
-	goombaSrcRect[0].w = 24;
-	goombaSrcRect[0].h = 24;*/
-
-	for(int i = 0; i < numBlocks; i++)  {
-		blockRect[i].x = blk[i].getXpos();
-		blockRect[i].y = blk[i].getYpos();
-		blockSrcRect[i].w = blk[i].getWidth();
-		blockSrcRect[i].h = blk[i].getHeight();
-		blockSrcRect[i].x = 0;
-		blockSrcRect[i].y = 0;
-	}
 	
 	for(int i = 0; i < numGoombas; i++)  {
 		goombaRect[i].x = goomba[i].getX();
@@ -99,7 +90,7 @@ void Level::playLevel() {
 		} else {
 		SDL_Event e;//Event handler
 
-		while(sp.getX() < 550 && !quit)  {
+		while(sp.getX() < 1050 - mapDistMove && !quit)  {
 				while( SDL_PollEvent( &e ) != 0 ){//Handle events on queue
 
 					switch(e.type){
@@ -136,6 +127,7 @@ void Level::playLevel() {
 				sp.jump();
 				checks();
                                 sp.move();
+				scrollScreen();
 				display();
 			}//end while
 		
@@ -159,6 +151,12 @@ void Level::display() { //displays Sprite
 		SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
 	
 	for(int i = 0; i < numBlocks; i++)  {
+		blockRect[i].x = blk[i].getXpos();
+		blockRect[i].y = blk[i].getYpos();
+		blockSrcRect[i].w = blk[i].getWidth();
+		blockSrcRect[i].h = blk[i].getHeight();
+		blockSrcRect[i].x = 0;
+		blockSrcRect[i].y = 0;
 		SDL_BlitSurface( blockImage, &blockSrcRect[i], gScreenSurface, &blockRect[i] );
 	}
 	
@@ -168,12 +166,11 @@ void Level::display() { //displays Sprite
 		goombaRect[i].y = 295;
 		goombaRect[i].x = goomba[i].getX();
 		
-		if(goomba[i].dead() == true) {}
-			//goombaImage = NULL;
+		if(goomba[i].dead() == true)
+			goombaImage = NULL;
 			
 		
 	}
-	//SDL_BlitSurface( goombaImage, &goombaSrcRect[0], gScreenSurface, &goombaRect[0] );
 
 	SDL_UpdateWindowSurface( gWindow );//Update the surface
 }
@@ -181,18 +178,20 @@ void Level::display() { //displays Sprite
 void Level::checks()  {
 
 	for(int i = 0; i < numBlocks; i++)  {
-		if(blk[i].isHit(sp.getX(), sp.getY()))
+		if(blk[i].isHit(sp.getX()+4, sp.getY()) || blk[i].isHit(sp.getX()+20, sp.getY()))
 			sp.setDirection(-1);
 
-		if(blk[i].isOn(sp.getX(), sp.getY()+32)) {
+		if(blk[i].isOn(sp.getX(), sp.getY()+32) || blk[i].isOn(sp.getX()+24, sp.getY()+32)) {
 			sp.setDirection(0);
-			sp.resetJumpCounter(); }
+			sp.resetJumpCounter();
+		}
 
 		if(blk[i].isHitLeft(sp.getX()+24, sp.getY()+16) && sp.getMoveVar() == -1)
 			sp.setMoveVar(0);
 
-		if(blk[i].isHitLeft(sp.getX(), sp.getY()+16) && sp.getMoveVar() == 1)
+		if(blk[i].isHitRight(sp.getX(), sp.getY()+16) && sp.getMoveVar() == 1)
 			sp.setMoveVar(0);
+	
 	}
 
 }
@@ -200,6 +199,7 @@ void Level::checks()  {
 void Level::scrollScreen()  {
 
 	if(sp.getX() > 500)  {
+		mapDistMove += sp.getX() - 500;
 		for(int i = 0; i < numBlocks; i++)  {
 			blk[i].setXpos(blk[i].getXpos() - sp.getX() + 500);
 		}

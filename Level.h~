@@ -168,7 +168,7 @@ void Level::display() { //displays Sprite
 		goombaRect[i].y = 295;
 		goombaRect[i].x = goomba[i].getX();
 		
-		if(goomba[i].dead() == true)
+		if(goomba[i].dead() == true) {}
 			//goombaImage = NULL;
 			
 		

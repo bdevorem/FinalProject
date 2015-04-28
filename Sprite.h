@@ -31,8 +31,8 @@ public:
 	int inAir();
 	int posX(); //returns the current x position of the sprite
 	void setX(int); // sets mario's x position on the screen
-	int posY(); //returns the current y position of the sprite
 	void setY(int);
+	int posY(); //returns the current y position of the sprite
 	void setDirection(int);
 	int getDirection();
 	SDL_Rect getHeroRect();
@@ -114,14 +114,12 @@ int Sprite::move() { //move function
 			heroRect.x -= 1;
 			//jumpRect.x -= 1;
 		}
-			SDL_FillRect(gScreenSurface,NULL,0x000000);
 	}
         else if(moveVar == -1)  {
 		//if(heroRect.x < 600) {
 			heroRect.x += 1;
 			//jumpRect.x += 1;
 		//}
-		SDL_FillRect(gScreenSurface,NULL,0x000000);
 	}
 }
 
@@ -185,6 +183,7 @@ int Sprite::posY() {
 
 void Sprite::setY(int a) {
 	y = a;
+	heroRect.y = a;
 }
 
 void Sprite::setDirection(int a) {
