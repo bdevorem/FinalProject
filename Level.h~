@@ -129,11 +129,11 @@ Level::Level() {
 	blk[30].setYpos(270);
 	blk[31].setXpos(2440);
 	blk[31].setYpos(250);
-	blk[32].setXpos(2400);
+	blk[32].setXpos(2420);
 	blk[32].setYpos(190);
 	blk[33].setXpos(2500);
 	blk[33].setYpos(120);
-	blk[34].setXpos(2320);
+	blk[34].setXpos(2340);
 	blk[34].setYpos(120);
 
 	blk[35].setXpos(3000);

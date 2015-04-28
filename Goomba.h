@@ -34,13 +34,10 @@ class Goomba: public Enemy {
 		int counter;
 		int moveVar;
 		bool newGoomba;
-		
-		
-
+	
 };
 #endif
 Goomba::Goomba() : Enemy() {
-
 
 	srand(time(NULL));
 	
@@ -69,58 +66,72 @@ void Goomba::moveGoomba() { //moves enemy
 	}
 }
 
-
 bool Goomba::isOn(int xpos, int ypos) {
+
 	if(ypos == y)
 		if( xpos >= x && xpos <= x+width)
 			return true;
 	return false;
 }
+
 int Goomba::getX() { //gives mario's x coordinate
 	return x;
 }
+
 int Goomba::getY() { //gives mario's y coordinate
 	return y;
 }
+
 bool Goomba::dead(){
 	return !alive;
 }
+
 void Goomba::setX(int a){
 	x = a;
 }
+
 void Goomba::setAlive(){
 	alive = false;
 }
+
 void Goomba::displayLives(){
-/////////////////////////////add stuff//////////////////
+	/////////////////////////////add stuff//////////////////
 }
+
 bool Goomba::isHitLeft(int Xpos, int Ypos) {
+
 	if(Xpos == x)
 		if(Ypos >= y && Ypos <= y+height)
 			return true;
 	return false;
 }
+
 bool Goomba::isHitRight(int Xpos, int Ypos) {
+
 	if(Xpos == x + width)
 		if(Ypos >= y && Ypos <= y+height)
 			return true;
 	return false;
 }
+
 void Goomba::setMoveVar(int i){
 	moveVar = i;
 }
+
 bool Goomba::makeNewGoomba(){
+
 	int temp = rand()%1000000;	
 	
-	if(temp > 999500)
+	if(temp > 999555)
 		return true;
 	else
 		return false;
 }
-void Goomba::setNewGoomba(bool a){
 
+void Goomba::setNewGoomba(bool a){
 	newGoomba = a;
 }
+
 int Goomba::getMoveVar() {
 	return moveVar;
 }

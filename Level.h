@@ -7,6 +7,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "Goomba.h"
+#include "Turtle.h"
 #include <unistd.h>
 
 using namespace std;
