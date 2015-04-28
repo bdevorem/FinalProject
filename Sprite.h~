@@ -116,7 +116,7 @@ int Sprite::move() { //move function
 			SDL_FillRect(gScreenSurface,NULL,0x000000);
 	}
         else if(moveVar == -1)  {
-		if(heroRect.x < 600) {
+		if(heroRect.x < 550) {
 			heroRect.x += 1;
 			//jumpRect.x += 1;
 		}

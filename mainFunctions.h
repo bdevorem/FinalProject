@@ -6,8 +6,8 @@
 #include <SDL2/SDL.h>
 using namespace std;
 
-const int SCREEN_WIDTH = 700;
-const int SCREEN_HEIGHT = 485;
+const int SCREEN_WIDTH = 600;
+const int SCREEN_HEIGHT = 385;
 
 bool init(); //Starts up SDL and creates window
 bool loadMedia(); //Loads media
