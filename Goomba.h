@@ -57,7 +57,7 @@ int Goomba::getY() { //gives mario's y coordinate
 }
 
 bool Goomba::dead(){
-	return alive;
+	return !alive;
 
 }
 
