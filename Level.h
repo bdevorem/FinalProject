@@ -206,7 +206,19 @@ void Level::checks()  {
 		if(goomba[i].isOn(sp.getX(), sp.getY()+32) || goomba[i].isOn(sp.getX()+24, sp.getY()+32)) {
 			goomba[i].setAlive();
 		}
-
+		
+		if(goomba[i].isHitLeft(sp.getX()+24, sp.getY()+16) && sp.getMoveVar() == -1){
+			sp.setMoveVar(0);
+			sp.damage();
+			goomba[i].setMoveVar(0);
+		}
+		
+		if(goomba[i].isHitRight(sp.getX(), sp.getY()+16) && sp.getMoveVar() == 1){
+			sp.setMoveVar(0);
+			sp.damage();
+			goomba[i].setMoveVar(0);
+		}
+		
 	}
 }
 

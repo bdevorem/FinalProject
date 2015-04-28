@@ -19,6 +19,7 @@ class Goomba: public Enemy {
 		void displayLives();
 		bool isHitLeft(int, int);
 		bool isHitRight(int, int);
+		void setMoveVar(int);
 		
 	private:
 		int x;
@@ -27,6 +28,7 @@ class Goomba: public Enemy {
 		int height;
 		bool alive = true;
 		int counter;
+		int moveVar;
 		
 		
 };
@@ -42,7 +44,7 @@ Goomba::Goomba() : Enemy() {
 void Goomba::moveGoomba() { //moves enemy
 	counter++; //goomba is SUPER fast, so fix this without making coordinates floats
 	
-	if(counter%3 == 0)
+	if(counter%5 == 0)
 		x -= 1;
 }
 
@@ -104,6 +106,9 @@ bool Goomba::isHitRight(int Xpos, int Ypos)  {
 
 }
 
+void Goomba::setMoveVar(int i){
+	moveVar = i;
+}
 
 
 
