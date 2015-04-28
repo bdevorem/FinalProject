@@ -19,16 +19,17 @@ class Level {
 		Level();
 		void playLevel();
 		void display(); //displays on screen based on outputs
-		void checks();
+		void checksMario();
+		void checksEnemy();
 		void scrollScreen();
 		
 	protected:
 		Sprite sp;
 		
 		int numBlocks;
-		Block blk[100];
-		SDL_Rect blockRect[100];
-		SDL_Rect blockSrcRect[100];
+		Block blk[50];
+		SDL_Rect blockRect[50];
+		SDL_Rect blockSrcRect[50];
 		
 		int numGoombas;
 		Goomba goomba[500]; //500 is temp max
@@ -46,7 +47,7 @@ class Level {
 
 Level::Level() {
 	mapDistMove = 0;
-	numBlocks = 100;
+	numBlocks = 50;
 	numGoombas = 2;
 	newGoomba = false;
 
@@ -121,6 +122,50 @@ Level::Level() {
 	blk[27].setYpos(265);
 	blk[28].setXpos(2100);
 	blk[28].setYpos(245);
+	// face figure in blocks
+	blk[29].setXpos(2400);
+	blk[29].setYpos(250);
+	blk[30].setXpos(2420);
+	blk[30].setYpos(270);
+	blk[31].setXpos(2440);
+	blk[31].setYpos(250);
+	blk[32].setXpos(2420);
+	blk[32].setYpos(190);
+	blk[33].setXpos(2500);
+	blk[33].setYpos(120);
+	blk[34].setXpos(2340);
+	blk[34].setYpos(120);
+
+	blk[35].setXpos(3000);
+	blk[35].setYpos(305);
+	blk[36].setXpos(3020);
+	blk[36].setYpos(285);
+	blk[37].setXpos(3020);
+	blk[37].setYpos(305);
+	blk[38].setXpos(3040);
+	blk[38].setYpos(265);
+	blk[39].setXpos(3040);
+	blk[39].setYpos(285);
+	blk[40].setXpos(3040);
+	blk[40].setYpos(305);
+	blk[41].setXpos(3060);
+	blk[41].setYpos(245);
+	blk[42].setXpos(3060);
+	blk[42].setYpos(265);
+	blk[43].setXpos(3060);
+	blk[43].setYpos(285);
+	blk[44].setXpos(3060);
+	blk[44].setYpos(305);
+	blk[45].setXpos(3080);
+	blk[45].setYpos(225);
+	blk[46].setXpos(3080);
+	blk[46].setYpos(245);
+	blk[47].setXpos(3080);
+	blk[47].setYpos(265);
+	blk[48].setXpos(3080);
+	blk[48].setYpos(285);
+	blk[49].setXpos(3080);
+	blk[49].setYpos(305);
 
 	for(int i = 0; i < 500; i++){
 		goomba[i].setX(570);//initialize all possible goombas
@@ -141,7 +186,7 @@ void Level::playLevel() {
 		} else {
 		SDL_Event e;//Event handler
 
-		while(sp.getAliveStatus() && sp.getX() < 10050 - mapDistMove && !quit)  {
+		while(sp.getAliveStatus() && sp.getX() < 3080 - mapDistMove && !quit)  {
 				while( SDL_PollEvent( &e ) != 0 ){//Handle events on queue
 
 					switch(e.type){
@@ -176,8 +221,9 @@ void Level::playLevel() {
 					
 				}//end while
 				sp.jump();
+				checksMario();
 				sp.move();
-				checks();
+				checksEnemy();
 				scrollScreen();
 				display();
 				
@@ -248,7 +294,7 @@ void Level::display() { //displays Sprite
 	SDL_UpdateWindowSurface( gWindow );//Update the surface
 }
 
-void Level::checks()  {
+void Level::checksMario()  {
 
 	for(int i = 0; i < numBlocks; i++)  {
 		if(blk[i].isHit(sp.getX()+4, sp.getY()) || blk[i].isHit(sp.getX()+20, sp.getY()))
@@ -266,7 +312,9 @@ void Level::checks()  {
 			sp.setMoveVar(0);
 	
 	}
-	
+}
+
+void Level::checksEnemy()  {
 	for(int i = 0; i < numGoombas; i++)  {
 
 		if(!goomba[i].dead() && goomba[i].isOn(sp.getX(), sp.getY()+32) || goomba[i].isOn(sp.getX()+24, sp.getY()+32)) {
