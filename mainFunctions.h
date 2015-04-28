@@ -20,6 +20,8 @@ SDL_Surface* gImage = NULL;//The image we will load and show on the screen
 SDL_Surface* heroImage = NULL; //The hero image will load
 SDL_Surface* jumpImage = NULL; //The jumping image loads
 SDL_Surface* walkImage = NULL; //The jumping image loads
+SDL_Surface* blockImage = NULL; //The jumping image loads
+SDL_Surface* goombaImage = NULL; //The jumping image loads
 
 bool init() {
 	bool success = true;//Initialization flag
