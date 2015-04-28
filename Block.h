@@ -14,6 +14,8 @@ class Block {
 		void setXpos(int);
 		void setYpos(int);
 		bool isOn(int, int);
+		bool isHitLeft(int, int);
+		bool isHitRight(int, int);
 
 	private:
 		SDL_Rect blockRect;
@@ -49,7 +51,7 @@ void Block::setYpos(int a)  {
 
 bool Block::isHit(int marioX, int marioY)  {
 
-	if(marioY == Ypos)
+	if(marioY == Ypos+height)
 		if(marioX >= Xpos && marioX <= Xpos+width)
 			return(1);
 
@@ -63,4 +65,24 @@ bool Block::isOn(int X, int Y)  {
 			return true;
 
 	return false;
+}
+
+bool Block::isHitLeft(int X, int Y)  {
+
+	if(X == Xpos)
+		if(Y >= Ypos && Y <= Ypos+height)
+			return true;
+
+	return false;
+
+}
+
+bool Block::isHitRight(int X, int Y)  {
+
+	if(X == Xpos + width)
+		if(Y >= Ypos && Y <= Ypos+height)
+			return true;
+
+	return false;
+
 }
