@@ -7,6 +7,8 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "Goomba.h"
+#include <unistd.h>
+
 using namespace std;
 
 #ifndef LEVEL_H
@@ -17,16 +19,17 @@ class Level {
 		Level();
 		void playLevel();
 		void display(); //displays on screen based on outputs
-		void checks();
+		void checksMario();
+		void checksEnemy();
 		void scrollScreen();
 		
 	protected:
 		Sprite sp;
 		
 		int numBlocks;
-		Block blk[4];
-		SDL_Rect blockRect[4];
-		SDL_Rect blockSrcRect[4];
+		Block blk[50];
+		SDL_Rect blockRect[50];
+		SDL_Rect blockSrcRect[50];
 		
 		int numGoombas;
 		Goomba goomba[500]; //500 is temp max
@@ -44,7 +47,7 @@ class Level {
 
 Level::Level() {
 	mapDistMove = 0;
-	numBlocks = 4;
+	numBlocks = 50;
 	numGoombas = 2;
 	newGoomba = false;
 
@@ -58,17 +61,111 @@ Level::Level() {
 	dstRect.h = 1000;
 	dstRect.w = 1000;
 
-	blk[0].setXpos(40);
-	blk[0].setYpos(230);
-
-	blk[1].setXpos(60);
+	blk[0].setXpos(100);
+	blk[0].setYpos(210);
+	blk[1].setXpos(120);
 	blk[1].setYpos(210);
-
-	blk[2].setXpos(80);
+	blk[2].setXpos(140);
 	blk[2].setYpos(210);
+	blk[3].setXpos(160);
+	blk[3].setYpos(230);
+	blk[4].setXpos(180);
+	blk[4].setYpos(230);
+	blk[5].setXpos(200);
+	blk[5].setYpos(230);
+	blk[6].setXpos(220);
+	blk[6].setYpos(250);
+	blk[7].setXpos(240);
+	blk[7].setYpos(250);
+	blk[8].setXpos(260);
+	blk[8].setYpos(250);
 
-	blk[3].setXpos(100);
-	blk[3].setYpos(210);
+	blk[9].setXpos(700);
+	blk[9].setYpos(230);
+	blk[10].setXpos(720);
+	blk[10].setYpos(230);
+	blk[11].setXpos(780);
+	blk[11].setYpos(180);
+	blk[12].setXpos(800);
+	blk[12].setYpos(180);
+	blk[13].setXpos(880);
+	blk[13].setYpos(130);
+	blk[14].setXpos(900);
+	blk[14].setYpos(130);
+	blk[15].setXpos(780);
+	blk[15].setYpos(80);
+	blk[16].setXpos(800);
+	blk[16].setYpos(80);
+	blk[17].setXpos(700);
+	blk[17].setYpos(30);
+	blk[18].setXpos(720);
+	blk[18].setYpos(30);
+
+	blk[19].setXpos(1400);
+	blk[19].setYpos(250);
+	blk[20].setXpos(1420);
+	blk[20].setYpos(250);
+	blk[21].setXpos(1440);
+	blk[21].setYpos(250);
+	blk[22].setXpos(1760);
+	blk[22].setYpos(250);
+	blk[23].setXpos(1780);
+	blk[23].setYpos(250);
+	blk[24].setXpos(1800);
+	blk[24].setYpos(250);
+
+	blk[25].setXpos(2100);
+	blk[25].setYpos(305);
+	blk[26].setXpos(2100);
+	blk[26].setYpos(285);
+	blk[27].setXpos(2100);
+	blk[27].setYpos(265);
+	blk[28].setXpos(2100);
+	blk[28].setYpos(245);
+	// face figure in blocks
+	blk[29].setXpos(2400);
+	blk[29].setYpos(250);
+	blk[30].setXpos(2420);
+	blk[30].setYpos(270);
+	blk[31].setXpos(2440);
+	blk[31].setYpos(250);
+	blk[32].setXpos(2420);
+	blk[32].setYpos(190);
+	blk[33].setXpos(2500);
+	blk[33].setYpos(120);
+	blk[34].setXpos(2340);
+	blk[34].setYpos(120);
+
+	blk[35].setXpos(3000);
+	blk[35].setYpos(305);
+	blk[36].setXpos(3020);
+	blk[36].setYpos(285);
+	blk[37].setXpos(3020);
+	blk[37].setYpos(305);
+	blk[38].setXpos(3040);
+	blk[38].setYpos(265);
+	blk[39].setXpos(3040);
+	blk[39].setYpos(285);
+	blk[40].setXpos(3040);
+	blk[40].setYpos(305);
+	blk[41].setXpos(3060);
+	blk[41].setYpos(245);
+	blk[42].setXpos(3060);
+	blk[42].setYpos(265);
+	blk[43].setXpos(3060);
+	blk[43].setYpos(285);
+	blk[44].setXpos(3060);
+	blk[44].setYpos(305);
+	blk[45].setXpos(3080);
+	blk[45].setYpos(225);
+	blk[46].setXpos(3080);
+	blk[46].setYpos(245);
+	blk[47].setXpos(3080);
+	blk[47].setYpos(265);
+	blk[48].setXpos(3080);
+	blk[48].setYpos(285);
+	blk[49].setXpos(3080);
+	blk[49].setYpos(305);
 
 	for(int i = 0; i < 500; i++){
 		goomba[i].setX(570);//initialize all possible goombas
@@ -89,7 +186,7 @@ void Level::playLevel() {
 		} else {
 		SDL_Event e;//Event handler
 
-		while(sp.getX() < 1050 - mapDistMove && !quit)  {
+		while(sp.getAliveStatus() && sp.getX() < 3080 - mapDistMove && !quit)  {
 				while( SDL_PollEvent( &e ) != 0 ){//Handle events on queue
 
 					switch(e.type){
@@ -124,8 +221,9 @@ void Level::playLevel() {
 					
 				}//end while
 				sp.jump();
-				checks();
-            sp.move();
+				checksMario();
+				sp.move();
+				checksEnemy();
 				scrollScreen();
 				display();
 				
@@ -144,7 +242,8 @@ void Level::playLevel() {
 				}
 				
 			}//end while
-		
+		if(!quit)
+			usleep(2000000);
 	}	} // end elses
 	close();
 }
@@ -156,14 +255,18 @@ void Level::display() { //displays Sprite
 
 	SDL_Rect heroSrcRect = sp.getHeroSrcRect();
 	SDL_Rect heroRect = sp.getHeroRect();
+	if(sp.getAliveStatus())  {
+		if(sp.inAir())
+			SDL_BlitSurface( jumpImage, &heroSrcRect, gScreenSurface, &heroRect );	
+		else if(sp.getMoveVar()!= 0)
+			SDL_BlitSurface( walkImage, &heroSrcRect, gScreenSurface, &heroRect );
+		else
+			SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
+	}
+	else  {
+		SDL_BlitSurface( blockImage, &heroSrcRect, gScreenSurface, &heroRect );	// change this image to dead image eventually
+	}
 
-	if(sp.inAir())
-		SDL_BlitSurface( jumpImage, &heroSrcRect, gScreenSurface, &heroRect );	
-	else if(sp.getMoveVar()!= 0)
-		SDL_BlitSurface( walkImage, &heroSrcRect, gScreenSurface, &heroRect );
-	else
-		SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
-	
 	for(int i = 0; i < numBlocks; i++)  {
 		blockRect[i].x = blk[i].getXpos();
 		blockRect[i].y = blk[i].getYpos();
@@ -176,7 +279,7 @@ void Level::display() { //displays Sprite
 	
 	for(int i = 0; i < numGoombas; i++)  {
 		goombaRect[i].x = goomba[i].getX();
-		goombaRect[i].y = 295;
+		goombaRect[i].y = 302;
 		goombaSrcRect[i].w = 24;
 		goombaSrcRect[i].h = 24;
 		goombaSrcRect[i].x = 0;
@@ -191,13 +294,13 @@ void Level::display() { //displays Sprite
 	SDL_UpdateWindowSurface( gWindow );//Update the surface
 }
 
-void Level::checks()  {
+void Level::checksMario()  {
 
 	for(int i = 0; i < numBlocks; i++)  {
 		if(blk[i].isHit(sp.getX()+4, sp.getY()) || blk[i].isHit(sp.getX()+20, sp.getY()))
 			sp.setDirection(-1);
 
-		if(blk[i].isOn(sp.getX(), sp.getY()+32) || blk[i].isOn(sp.getX()+24, sp.getY()+32)) {
+		if(blk[i].isOn(sp.getX()+4, sp.getY()+32) || blk[i].isOn(sp.getX()+20, sp.getY()+32)) {
 			sp.setDirection(0);
 			sp.resetJumpCounter();
 		}
@@ -209,40 +312,51 @@ void Level::checks()  {
 			sp.setMoveVar(0);
 	
 	}
-	
+}
+
+void Level::checksEnemy()  {
 	for(int i = 0; i < numGoombas; i++)  {
 
-		if(goomba[i].isOn(sp.getX(), sp.getY()+32) || goomba[i].isOn(sp.getX()+24, sp.getY()+32)) {
+		if(!goomba[i].dead() && goomba[i].isOn(sp.getX(), sp.getY()+32) || goomba[i].isOn(sp.getX()+24, sp.getY()+32)) {
 			goomba[i].setAlive();
+			sp.setDirection(1);
 		}
 		
-		if(goomba[i].isHitLeft(sp.getX()+24, sp.getY()+16) && sp.getMoveVar() == -1){
+		if(!goomba[i].dead() && goomba[i].isHitLeft(sp.getX()+24, sp.getY()+16)){
 			sp.setMoveVar(0);
 			sp.damage();
 		}
 		
-		if(goomba[i].isHitRight(sp.getX(), sp.getY()+16) && sp.getMoveVar() == 1){
+		if(!goomba[i].dead() && goomba[i].isHitRight(sp.getX(), sp.getY()+16)){
 			sp.setMoveVar(0);
 			sp.damage();
 		}
+		for(int j = 0; j < numBlocks; j++)  {
+			if(!goomba[i].dead() && goomba[i].isHitLeft(blk[j].getXpos()+20, blk[j].getYpos())){
+				goomba[i].setMoveVar(-goomba[i].getMoveVar());
+			}
 		
+			if(!goomba[i].dead() && goomba[i].isHitRight(blk[j].getXpos(), blk[j].getYpos())){
+				goomba[i].setMoveVar(-goomba[i].getMoveVar());
+			}
+		}
 	}
 }
 
 void Level::scrollScreen()  {
 
-	if(sp.getX() > 500)  {
-		mapDistMove += sp.getX() - 500;
+	if(sp.getX() > 350)  {
+		mapDistMove += sp.getX() - 350;
 		
 		for(int i = 0; i < numBlocks; i++)  {
-			blk[i].setXpos(blk[i].getXpos() - sp.getX() + 500);
+			blk[i].setXpos(blk[i].getXpos() - sp.getX() + 350);
 		}
 		
 		for(int i = 0; i < numGoombas; i++)  {
-			goomba[i].setX(goomba[i].getX() - sp.getX() + 500);
+			goomba[i].setX(goomba[i].getX() - sp.getX() + 350);
 		}
 		
-		sp.setX(500);
+		sp.setX(350);
 	}
 
 }
