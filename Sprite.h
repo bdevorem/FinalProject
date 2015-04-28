@@ -30,6 +30,7 @@ public:
 	void jumpDown(); //jumping from stationary position downward
 	int inAir();
 	int posX(); //returns the current x position of the sprite
+	void setX(int); // sets mario's x position on the screen
 	int posY(); //returns the current y position of the sprite
 	void setY(int);
 	void setDirection(int);
@@ -116,10 +117,10 @@ int Sprite::move() { //move function
 			SDL_FillRect(gScreenSurface,NULL,0x000000);
 	}
         else if(moveVar == -1)  {
-		if(heroRect.x < 600) {
+		//if(heroRect.x < 600) {
 			heroRect.x += 1;
 			//jumpRect.x += 1;
-		}
+		//}
 		SDL_FillRect(gScreenSurface,NULL,0x000000);
 	}
 }
@@ -149,6 +150,10 @@ void Sprite::die() { //mario dies
 
 int Sprite::getX() { //gives mario's x coordinate
 	return heroRect.x;
+}
+
+void Sprite::setX(int a)  {  // sets mario's x coordinate
+	heroRect.x = a;
 }
 
 int Sprite::getY() { //gives mario's y coordinate

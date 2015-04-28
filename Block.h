@@ -12,14 +12,16 @@ class Block {
 		Block(int = 0, int = 0); //non-default constructor
 		bool isHit(int, int);
 		void setXpos(int);
+		int getXpos();
+		int getYpos();
+		int getWidth();
+		int getHeight();
 		void setYpos(int);
 		bool isOn(int, int);
 		bool isHitLeft(int, int);
 		bool isHitRight(int, int);
 
 	private:
-		SDL_Rect blockRect;
-		SDL_Rect blockSrcRect;
 		int Xpos;
 		int Ypos;
 		int width;
@@ -28,11 +30,6 @@ class Block {
 #endif
 
 Block::Block(int x, int y)  {
-
-	blockRect.x = x;
-	blockRect.y = y;
-	blockSrcRect.w = 20;
-	blockSrcRect.h = 20;
 
 	Xpos = x;
 	Ypos = y;
@@ -45,8 +42,24 @@ void Block::setXpos(int a)  {
 	Xpos = a;
 }
 
+int Block::getXpos()  {
+	return(Xpos);
+}
+
 void Block::setYpos(int a)  {
 	Ypos = a;
+}
+
+int Block::getYpos()  {
+	return(Ypos);
+}
+
+int Block::getWidth()  {
+	return(width);
+}
+
+int Block::getHeight()  {
+	return(height);
 }
 
 bool Block::isHit(int marioX, int marioY)  {

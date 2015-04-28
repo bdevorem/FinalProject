@@ -17,6 +17,7 @@ class Level {
 		void playLevel();
 		void display(); //displays on screen based on outputs
 		void checks();
+		void scrollScreen();
 		
 	protected:
 		Sprite sp;
@@ -24,11 +25,14 @@ class Level {
 		Block blk[2];
 		SDL_Rect srcRect;
 		SDL_Rect dstRect;
+		int mapDistMove;
+		SDL_Rect blockRect[2];
+		SDL_Rect blockSrcRect[2];
 };
 #endif
 
 Level::Level() {
-
+	mapDistMove = 0;
 	numBlocks = 2;
 
 	srcRect.x = 0;
@@ -46,6 +50,15 @@ Level::Level() {
 
 	blk[1].setXpos(200);
 	blk[1].setYpos(299);
+
+	for(int i = 0; i < numBlocks; i++)  {
+		blockRect[i].x = blk[i].getXpos();
+		blockRect[i].y = blk[i].getYpos();
+		blockSrcRect[i].w = blk[i].getWidth();
+		blockSrcRect[i].h = blk[i].getHeight();
+		blockSrcRect[i].x = 0;
+		blockSrcRect[i].y = 0;
+	}
 
 }
 
@@ -119,6 +132,10 @@ void Level::display() { //displays Sprite
 		SDL_BlitSurface( walkImage, &heroSrcRect, gScreenSurface, &heroRect );
 	else
 		SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
+	
+	for(int i = 0; i < numBlocks; i++)  {
+		SDL_BlitSurface( blockImage, &blockSrcRect[i], gScreenSurface, &blockRect[i] );
+	}
 
 	SDL_UpdateWindowSurface( gWindow );//Update the surface
 }
@@ -138,6 +155,17 @@ void Level::checks()  {
 
 		if(blk[i].isHitLeft(sp.getX(), sp.getY()+16) && sp.getMoveVar() == 1)
 			sp.setMoveVar(0);
+	}
+
+}
+
+void Level::scrollScreen()  {
+
+	if(sp.getX() > 500)  {
+		for(int i = 0; i < numBlocks; i++)  {
+			blk[i].setXpos(blk[i].getXpos() - sp.getX() + 500);
+		}
+		sp.setX(500);
 	}
 
 }
