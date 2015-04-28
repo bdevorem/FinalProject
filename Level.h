@@ -41,8 +41,11 @@ Level::Level() {
 	dstRect.h = 1000;
 	dstRect.w = 1000;
 
-	blk[0].setXpos(100);
+	blk[0].setXpos(0);
 	blk[0].setYpos(190);
+
+	blk[1].setXpos(200);
+	blk[1].setYpos(299);
 
 }
 
@@ -92,9 +95,9 @@ void Level::playLevel() {
 					}//end switch
 					
 				}//end while
-                                sp.move();
 				sp.jump();
 				checks();
+                                sp.move();
 				display();
 			}//end while
 		
@@ -129,6 +132,12 @@ void Level::checks()  {
 		if(blk[i].isOn(sp.getX(), sp.getY()+32)) {
 			sp.setDirection(0);
 			sp.resetJumpCounter(); }
+
+		if(blk[i].isHitLeft(sp.getX()+24, sp.getY()+16) && sp.getMoveVar() == -1)
+			sp.setMoveVar(0);
+
+		if(blk[i].isHitLeft(sp.getX(), sp.getY()+16) && sp.getMoveVar() == 1)
+			sp.setMoveVar(0);
 	}
 
 }
