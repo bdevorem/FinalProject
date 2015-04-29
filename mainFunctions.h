@@ -30,6 +30,9 @@ SDL_Surface* loseImage = NULL; //The jumping image loads
 SDL_Surface* lives2Image = NULL; //The jumping image loads
 SDL_Surface* lives1Image = NULL; //The jumping image loads
 SDL_Surface* shroomImage = NULL; //The jumping image loads
+SDL_Surface* herogImage = NULL; //The jumping image loads
+SDL_Surface* walkgImage = NULL; //The jumping image loads
+SDL_Surface* jumpgImage = NULL; //The jumping image loads
 
 bool init() {
 	bool success = true;//Initialization flag
@@ -96,6 +99,15 @@ bool loadMedia() {
 		success = false;
 	lives1Image = SDL_LoadBMP( "lives1.bmp" );
 	if( lives1Image == NULL )
+		success = false;
+	herogImage = SDL_LoadBMP( "mario2.bmp" );
+	if( herogImage == NULL )
+		success = false;
+	walkgImage = SDL_LoadBMP( "walkg.bmp" );
+	if( walkgImage == NULL )
+		success = false;
+	jumpgImage = SDL_LoadBMP( "jumpg.bmp" );
+	if( jumpgImage == NULL )
 		success = false;
 
 	return success;

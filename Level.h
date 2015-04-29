@@ -373,12 +373,25 @@ void Level::display() { //displays Sprite
 	}
 
 	if(sp.getAliveStatus())  {
-		if(sp.inAir())
-			SDL_BlitSurface( jumpImage, &heroSrcRect, gScreenSurface, &heroRect );	
-		else if(sp.getMoveVar()!= 0)
-			SDL_BlitSurface( walkImage, &heroSrcRect, gScreenSurface, &heroRect );
-		else
-			SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
+		if(sp.inAir()) {
+			if (sp.isBig()) {
+				SDL_BlitSurface( jumpgImage, &heroSrcRect, gScreenSurface, &heroRect );
+			} else {
+				SDL_BlitSurface( jumpImage, &heroSrcRect, gScreenSurface, &heroRect );
+			}
+		} else if(sp.getMoveVar()!= 0) {
+			if (sp.isBig()) {
+				SDL_BlitSurface( walkgImage, &heroSrcRect, gScreenSurface, &heroRect );
+			} else {
+				SDL_BlitSurface( walkImage, &heroSrcRect, gScreenSurface, &heroRect );
+			}
+		} else {
+			if (sp.isBig()) {
+				SDL_BlitSurface( herogImage, &heroSrcRect, gScreenSurface, &heroRect );
+			} else {
+				SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
+			}
+		}
 	} else  {
 		SDL_BlitSurface( deadImage, &heroSrcRect, gScreenSurface, &heroRect );	// he dead, change image to dead one
 		SDL_UpdateWindowSurface( gWindow );

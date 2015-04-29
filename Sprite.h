@@ -44,6 +44,7 @@ public:
 	int getLives();
 	void setLives(int);
 	void setAlive();
+	bool isBig();
 
 
 private:
@@ -235,4 +236,8 @@ int Sprite::getLives() {
 
 void Sprite::setAlive() {
 	alive = true;
+}
+
+bool Sprite::isBig() {
+	return large;
 }
