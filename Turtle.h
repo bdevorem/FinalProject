@@ -25,7 +25,8 @@ class Turtle: public Enemy {
 		void setMoveVar(int);
 		bool makeNewTurtle();
 		void setNewTurtle(bool);
-		int getMoveVar();		
+		int getMoveVar();	
+		void setPushed(bool);	
 
 	private:
 		int x;
@@ -36,6 +37,7 @@ class Turtle: public Enemy {
 		int counter;
 		int moveVar;
 		bool newTurtle;
+		bool pushed;
 		
 		
 
@@ -52,12 +54,13 @@ Turtle::Turtle() : Enemy() {
 	moveVar = 1;
 	newTurtle = false;
 	alive = 2;
+	pushed = false;
 } 
 
 void Turtle::moveTurtle() { //moves enemy
 	counter++;
 
-	if(alive == 2)  {
+	if(alive == 2 || pushed == true)  { //if turtle is completely alive or pushed
 		if(moveVar == 1){
 			if(counter%5 == 0)//same speed as goomba
 				x -= 1;
@@ -133,12 +136,15 @@ bool Turtle::makeNewTurtle(){
 }
 
 void Turtle::setNewTurtle(bool a){
-
 	newTurtle = a;
 }
 
 int Turtle::getMoveVar() {
 	return moveVar;
+}
+
+void Turtle::setPushed(bool a){
+	pushed = a;
 }
 
 
