@@ -9,6 +9,7 @@
 #include "Goomba.h"
 #include "Turtle.h"
 #include <unistd.h>
+#include "Mushroom.h"
 
 using namespace std;
 
@@ -31,6 +32,12 @@ protected:
 	Block blk[50];
 	SDL_Rect blockRect[50];
 	SDL_Rect blockSrcRect[50];
+
+	int numShrooms;
+	Mushroom shroom[1];
+	SDL_Rect shroomRect[1];
+	SDL_Rect shroomSrcRect[1];
+	bool gotShroom[1];
 
 	int numGoombas;
 	Goomba goomba[500]; //500 is temp max
@@ -57,6 +64,7 @@ Level::Level() {
 	mapDistMove = 0;
 	numBlocks = 50;
 	numGoombas = 2;
+	numShrooms = 1;
 	newGoomba = false;
 	numTurtles = 2;
 	newTurtle = false;
@@ -70,6 +78,10 @@ Level::Level() {
 	dstRect.y = 0;
 	dstRect.h = 1000;
 	dstRect.w = 1000;
+
+	shroom[0].setX(700);
+	shroom[0].setY(10);
+	gotShroom[0] = false;
 
 	blk[0].setXpos(100);
 	blk[0].setYpos(210);
@@ -302,6 +314,17 @@ void Level::display() { //displays Sprite
 	SDL_Rect heroSrcRect = sp.getHeroSrcRect();
 	SDL_Rect heroRect = sp.getHeroRect();
 
+	for(int i = 0; i < numShrooms; i++)  {
+		if(!gotShroom[i])  {
+			shroomRect[i].x = shroom[i].getX();
+			shroomRect[i].y = shroom[i].getY();
+			shroomSrcRect[i].w = shroom[i].getWidth();
+			shroomSrcRect[i].h = shroom[i].getHeight();
+			shroomSrcRect[i].x = 0;
+			shroomSrcRect[i].y = 0;
+			SDL_BlitSurface( shroomImage, &shroomSrcRect[i], gScreenSurface, &shroomRect[i] );
+		}
+	}
 
 	for(int i = 0; i < numBlocks; i++)  {
 		blockRect[i].x = blk[i].getXpos();
@@ -392,9 +415,16 @@ void Level::checksMario()  {
 			sp.setMoveVar(0);
 
 	}
+
+	for(int j = 0; j < numShrooms; j++)  
+		if(shroom[j].isTouch(sp.getX(), sp.getY()) || shroom[j].isTouch(sp.getX()+24, sp.getY()) || shroom[j].isTouch(sp.getX(), sp.getY()+32) || shroom[j].isTouch(sp.getX(), sp.getY()+32))  {
+			sp.grow();
+			gotShroom[j] = true;
+		}
 }
 
 void Level::checksEnemy()  {
+
 	for(int i = 0; i < numGoombas; i++)  {
 
 		if(!goomba[i].dead() && goomba[i].isOn(sp.getX(), sp.getY()+32) || goomba[i].isOn(sp.getX()+24, sp.getY()+32)) {
@@ -403,13 +433,15 @@ void Level::checksEnemy()  {
 		}
 
 		if(!goomba[i].dead() && goomba[i].isHitLeft(sp.getX()+24, sp.getY()+16)){
-			sp.setMoveVar(0);
 			sp.damage();
+			if(sp.getAliveStatus())
+				goomba[i].setAlive();
 		}
 
 		if(!goomba[i].dead() && goomba[i].isHitRight(sp.getX(), sp.getY()+16)){
-			sp.setMoveVar(0);
 			sp.damage();
+			if(sp.getAliveStatus())
+				goomba[i].setAlive();
 		}
 		for(int j = 0; j < numBlocks; j++)  {
 			if(!goomba[i].dead() && goomba[i].isHitLeft(blk[j].getXpos()+20, blk[j].getYpos())){
@@ -432,13 +464,19 @@ void Level::checksEnemy()  {
 		}
 
 		if(turtle[i].dead() != 0 && turtle[i].isHitLeft(sp.getX()+24, sp.getY()+16)){
-			sp.setMoveVar(0);
 			sp.damage();
+			if(sp.getAliveStatus())  {
+				turtle[i].damage();
+				turtle[i].damage();
+			}
 		}
 
 		if(turtle[i].dead() != 0 && turtle[i].isHitRight(sp.getX(), sp.getY()+16)){
-			sp.setMoveVar(0);
 			sp.damage();
+			if(sp.getAliveStatus())  {
+				turtle[i].damage();
+				turtle[i].damage();
+			}
 		}
 		for(int j = 0; j < numBlocks; j++)  {
 			if(turtle[i].dead() !=0 && turtle[i].isHitLeft(blk[j].getXpos()+20, blk[j].getYpos())){
@@ -508,6 +546,10 @@ void Level::scrollScreen()  {
 
 		for(int i = 0; i < numTurtles; i++)  {
 			turtle[i].setX(turtle[i].getX() - sp.getX() + 350);
+		}
+
+		for(int i = 0; i < numShrooms; i++)  {
+			shroom[i].setX(shroom[i].getX() - sp.getX() + 350);
 		}
 
 		sp.setX(350);
