@@ -354,6 +354,9 @@ void Level::display() { //displays Sprite
 		cloudSrcRect[i].h = cloud[i].getHeight();
 		cloudSrcRect[i].x = 0;
 		cloudSrcRect[i].y = 0;
+		if (flagRect.x - cloudRect[i].x <= 300) {
+			cloudRect[i].y = 400;
+		}
 		SDL_BlitSurface( cloudImage, &cloudSrcRect[i], gScreenSurface, &cloudRect[i] );
 	}
 	SDL_BlitSurface( flagImage, &flagSrcRect, gScreenSurface, &flagRect ); 
@@ -615,6 +618,7 @@ void Level::scrollScreen()  { //function to scroll the screen
 			mapDistMove += sp.getX() - 350;
 	/* Each for loops moves every object over as Mario progresses through the game
 		the mapDistMove variable keeps track of how far Mario has moved across the map */
+			flagRect.x = flagRect.x - sp.getX() + 350;
 			for(int i = 0; i < numBlocks; i++)  {
 				blk[i].setXpos(blk[i].getXpos() - sp.getX() + 350);
 			}
@@ -634,7 +638,6 @@ void Level::scrollScreen()  { //function to scroll the screen
 			for(int i = 0; i < numClouds; i++)  {
 				cloud[i].setX(cloud[i].getX() - sp.getX() + 350);
 			}
-			flagRect.x = flagRect.x - sp.getX() + 350;
 			sp.setX(350);
 		}
 	}
