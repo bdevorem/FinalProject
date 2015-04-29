@@ -25,6 +25,10 @@ SDL_Surface* goombaImage = NULL; //The jumping image loads
 SDL_Surface* turtleImage = NULL; //The jumping image loads
 SDL_Surface* shellImage = NULL; //The jumping image loads
 SDL_Surface* deadImage = NULL; //The jumping image loads
+SDL_Surface* winImage = NULL; //The jumping image loads
+SDL_Surface* loseImage = NULL; //The jumping image loads
+SDL_Surface* lives2Image = NULL; //The jumping image loads
+SDL_Surface* lives1Image = NULL; //The jumping image loads
 SDL_Surface* shroomImage = NULL; //The jumping image loads
 
 bool init() {
@@ -80,6 +84,18 @@ bool loadMedia() {
 		success = false;
 	shroomImage = SDL_LoadBMP( "shroom.bmp" );
 	if( shroomImage == NULL )
+		success = false;
+	winImage = SDL_LoadBMP( "win.bmp" );
+	if( winImage == NULL )
+		success = false;
+	loseImage = SDL_LoadBMP( "lose.bmp" );
+	if( loseImage == NULL )
+		success = false;
+	lives2Image = SDL_LoadBMP( "2lives.bmp" );
+	if( lives2Image == NULL )
+		success = false;
+	lives1Image = SDL_LoadBMP( "lives1.bmp" );
+	if( lives1Image == NULL )
 		success = false;
 
 	return success;
