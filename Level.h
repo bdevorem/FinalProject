@@ -10,6 +10,7 @@
 #include "Turtle.h"
 #include <unistd.h>
 #include "Mushroom.h"
+#include "Scenery.h"
 
 using namespace std;
 
@@ -51,6 +52,12 @@ protected:
 	SDL_Rect turtleSrcRect[500];
 	bool newTurtle;
 
+	int numClouds;
+	Scenery cloud[500];
+	SDL_Rect cloudRect[500];
+	SDL_Rect cloudSrcRect[500];
+	bool newCloud;
+
 	SDL_Rect srcRect;
 	SDL_Rect dstRect;
 	int mapDistMove;
@@ -65,6 +72,7 @@ Level::Level() {
 	numBlocks = 50;
 	numGoombas = 2;
 	numShrooms = 1;
+	numClouds = 500;
 	newGoomba = false;
 	numTurtles = 2;
 	newTurtle = false;
@@ -189,8 +197,15 @@ Level::Level() {
 	blk[49].setXpos(3080);
 	blk[49].setYpos(305);
 
+	int h = 100;
+
 	for(int i = 0; i < 500; i++){
 		goomba[i].setX(570);//initialize all possible goombas
+	}
+
+	for(int i = 0; i < 500; i++){
+		cloud[i].setX(h);//initialize all possible clouds
+		h += 300;
 	}
 
 	for(int i = 0; i < 500; i++){
@@ -321,6 +336,16 @@ void Level::display() { //displays Sprite
 	SDL_Rect heroSrcRect = sp.getHeroSrcRect();
 	SDL_Rect heroRect = sp.getHeroRect();
 
+	for(int i = 0; i < numClouds; i++)  {
+		cloudRect[i].x = cloud[i].getX();
+		cloudRect[i].y = cloud[i].getY();
+		cloudSrcRect[i].w = cloud[i].getWidth();
+		cloudSrcRect[i].h = cloud[i].getHeight();
+		cloudSrcRect[i].x = 0;
+		cloudSrcRect[i].y = 0;
+		SDL_BlitSurface( cloudImage, &cloudSrcRect[i], gScreenSurface, &cloudRect[i] );
+	}
+
 	for(int i = 0; i < numShrooms; i++)  {
 		if(!gotShroom[i])  {
 			shroomRect[i].x = shroom[i].getX();
@@ -342,6 +367,7 @@ void Level::display() { //displays Sprite
 		blockSrcRect[i].y = 0;
 		SDL_BlitSurface( blockImage, &blockSrcRect[i], gScreenSurface, &blockRect[i] );
 	}
+
 
 	for(int i = 0; i < numGoombas; i++)  {
 		goombaRect[i].x = goomba[i].getX();
@@ -371,6 +397,8 @@ void Level::display() { //displays Sprite
 			SDL_BlitSurface( shellImage, &turtleSrcRect[i], gScreenSurface, &turtleRect[i] );
 		//if dead, no image is displayed
 	}
+
+	
 
 	if(sp.getAliveStatus())  {
 		if(sp.inAir()) {
@@ -637,6 +665,9 @@ void Level::scrollScreen()  {
 			shroom[i].setX(shroom[i].getX() - sp.getX() + 350);
 		}
 
+		for(int i = 0; i < numClouds; i++)  {
+			cloud[i].setX(cloud[i].getX() - sp.getX() + 350);
+		}
 		sp.setX(350);
 	}
 

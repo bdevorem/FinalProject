@@ -33,6 +33,7 @@ SDL_Surface* shroomImage = NULL; //The jumping image loads
 SDL_Surface* herogImage = NULL; //The jumping image loads
 SDL_Surface* walkgImage = NULL; //The jumping image loads
 SDL_Surface* jumpgImage = NULL; //The jumping image loads
+SDL_Surface* cloudImage = NULL; //The jumping image loads
 
 bool init() {
 	bool success = true;//Initialization flag
@@ -108,6 +109,9 @@ bool loadMedia() {
 		success = false;
 	jumpgImage = SDL_LoadBMP( "jumpg.bmp" );
 	if( jumpgImage == NULL )
+		success = false;
+	cloudImage = SDL_LoadBMP( "cloud.bmp" );
+	if( cloudImage == NULL )
 		success = false;
 
 	return success;
