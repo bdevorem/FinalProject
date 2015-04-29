@@ -258,7 +258,7 @@ void Level::playLevel() {
 					newGoomba = false;
 					goomba[0].setNewGoomba(false);
 					
-					if(goomba[numGoombas].getX() - goomba[numGoombas-1].getX() > 30 || goomba[numGoombas].getX() - turtle[numTurtles-1].getX() > 30){
+					if(goomba[numGoombas].getX() - goomba[numGoombas-1].getX() > 50 || goomba[numGoombas].getX() - turtle[numTurtles-1].getX() > 50){
 						numGoombas++;
 					}
 					
@@ -274,7 +274,7 @@ void Level::playLevel() {
 					newTurtle = false;
 					turtle[0].setNewTurtle(false);
 					
-					if(turtle[numTurtles].getX() - turtle[numTurtles-1].getX() > 30 || turtle[numTurtles].getX() - goomba[numGoombas-1].getX() > 30){
+					if(turtle[numTurtles].getX() - turtle[numTurtles-1].getX() > 50 || turtle[numTurtles].getX() - goomba[numGoombas-1].getX() > 50){
 						numTurtles++;
 					}
 				}
@@ -450,6 +450,7 @@ void Level::checksEnemy()  {
 			if(sp.getAliveStatus())
 				goomba[i].setAlive();
 		}
+		
 		for(int j = 0; j < numBlocks; j++)  {
 			if(!goomba[i].dead() && goomba[i].isHitLeft(blk[j].getXpos()+20, blk[j].getYpos())){
 				goomba[i].setMoveVar(-goomba[i].getMoveVar());
@@ -457,8 +458,43 @@ void Level::checksEnemy()  {
 
 			if(!goomba[i].dead() && goomba[i].isHitRight(blk[j].getXpos(), blk[j].getYpos())){
 				goomba[i].setMoveVar(-goomba[i].getMoveVar());
+			}//end if
+		}//end for
+		
+		///////////////////////////////////////////////////////////////////////////
+			//check if other goombas hit this goomba, change direction if so
+		for(int z = i+1; z < numGoombas; z++){
+			if(!goomba[i].dead() && goomba[i].isHitLeft(goomba[z].getX()+24, goomba[z].getY()+16)){
+				goomba[i].setMoveVar(-goomba[i].getMoveVar());
+				goomba[z].setMoveVar(-goomba[z].getMoveVar());
 			}
-		}
+			
+
+			if(!goomba[i].dead() && goomba[i].isHitRight(goomba[z].getX(), goomba[z].getY()+16)){
+				goomba[i].setMoveVar(-goomba[i].getMoveVar());
+				goomba[z].setMoveVar(-goomba[z].getMoveVar());
+			}
+		
+		}//end for
+		
+			//check if turtles hit this goomba, if so, change direction
+			
+		for(int y = 0; y < numTurtles; y++){
+			if(!goomba[i].dead() && goomba[i].isHitLeft(turtle[y].getX()+24, turtle[y].getY())){
+				goomba[i].setMoveVar(-goomba[i].getMoveVar());
+				turtle[y].setMoveVar(-turtle[y].getMoveVar());
+			}
+			
+
+			if(!goomba[i].dead() && goomba[i].isHitRight(turtle[y].getX(), turtle[y].getY()+16)){
+				goomba[i].setMoveVar(-goomba[i].getMoveVar());
+				turtle[y].setMoveVar(-turtle[y].getMoveVar());
+			}
+		
+		}//end for
+		
+		
+		////////////////////////////////////////////////////////////////////////////
 	}
 
 
@@ -494,7 +530,26 @@ void Level::checksEnemy()  {
 				turtle[i].setMoveVar(-turtle[i].getMoveVar());
 			}
 		}
-		////////////////////////////////
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	/*	////////////////////////////////
 
 		/*		for(int n = 0; n < numGoombas; n++){
 
@@ -503,7 +558,7 @@ void Level::checksEnemy()  {
 						else turtle[i].setMoveVar(-turtle[i].getMoveVar());
 				}
 
-			}*/
+			}
 
 		//if in shell and is hit on the left by the previous turtles
 		for(int l = 0; l < numTurtles; l++){
@@ -531,8 +586,18 @@ void Level::checksEnemy()  {
 
 		}
 
-
+*/
 		////////////////////////////////
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 	}
 
