@@ -386,7 +386,8 @@ void Level::checksEnemy()  {
 	
 	
 	for(int i = 0; i < numTurtles; i++)  {
-
+		if(turtle[i].dead() == 0)
+			turtle[i].setX(-20);
 		if(turtle[i].dead() != 0 && turtle[i].isOn(sp.getX(), sp.getY()+32) || turtle[i].isOn(sp.getX()+24, sp.getY()+32)) {
 			turtle[i].damage();
 			sp.setDirection(1);

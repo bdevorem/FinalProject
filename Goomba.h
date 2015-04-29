@@ -6,7 +6,7 @@
 #include <time.h>
 #ifndef GOOMBA_H
 #define GOOMBA_H
-class Goomba: public Enemy {
+class Goomba {
 
 	public:
 		Goomba(); //default constructor w/ x and y position
@@ -37,7 +37,7 @@ class Goomba: public Enemy {
 	
 };
 #endif
-Goomba::Goomba() : Enemy() {
+Goomba::Goomba() {
 
 	srand(time(NULL));
 	
