@@ -324,7 +324,7 @@ void Level::display() { //displays Sprite
 		if(turtle[i].dead() == 2)//alive image
 			SDL_BlitSurface( turtleImage, &turtleSrcRect[i], gScreenSurface, &turtleRect[i] );
 		else if(turtle[i].dead() == 1) //in shell image
-			SDL_BlitSurface( turtleImage, &turtleSrcRect[i], gScreenSurface, &turtleRect[i] );
+			SDL_BlitSurface( shellImage, &turtleSrcRect[i], gScreenSurface, &turtleRect[i] );
 			//if dead, no image is displayed
 	}
 

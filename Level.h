@@ -286,7 +286,7 @@ void Level::display() { //displays Sprite
 			SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
 	}
 	else  {
-		SDL_BlitSurface( blockImage, &heroSrcRect, gScreenSurface, &heroRect );	// change this image to dead image eventually
+		SDL_BlitSurface( deadImage, &heroSrcRect, gScreenSurface, &heroRect );	// change this image to dead image eventually
 	}
 
 	for(int i = 0; i < numBlocks; i++)  {
