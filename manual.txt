@@ -13,13 +13,42 @@
 		advancing towards the end of the level, which he reaches by walking, running, and jumping
 		towards the right side of the map. He can only do this through user control, and with the
 		help of an incredible leaping ability, a few conveniently (or inconveniently) placed bricks,
-		and mushrooms with magical powers.
+		and mushrooms with magical powers. Upon either dying or beating the level, the user is given
+		a visual message from the program.
 
 	*Programmer's Perspective:
 		From a programmer's perspective, this game takes a highly object-oriented approach to making
 		a game from scratch with only the help of the included SDL2 graphics library and a series of
-		sprite images, credit to an online user at arik239.deviantart.com . 
+		sprite images, credit to an online user at arik239.deviantart.com. First, we started by creating
+		a main function, in which we include the majority of our SDL graphics functions, which access a number
+		of variables assigned in the Level class. The Level class utilizes composition to include nearly every
+		other class in the game, most notably the Sprite class (the player sprite), the Goomba and Turtle classes
+		(both of which are derived from the abstract class Enemy), the Scenery class, the Block class, and the Mushroom
+		class, all of which are included as protected data members under level and interact in a number of different ways.
+		The Level class includes the functions that drive the program itself. The playLevel() function is a driver within
+		the level class that loops through a series of commands (notably, the other functions which will be discussed)
+		under the conditions that the game is still running. The display() function loops through every different sprite
+		on the screen, and given its various attributes and coordinates, displays the appropriate SDL surfaces in the
+		assigned areas and takes the program data to screen. The checksMario() and checksEnemy() functions work similarly,
+		in which they both look to the position of the various sprites on the screen and based on the positions, they
+		determine whether Mario is being touched on the side and taking damage, or if the enemies are being touched
+		on the top and taking damage. The final function in the Level class is the scrollScreen() function, which uses
+		a pixel offset to scroll the contents with respect to the background and make it appear as if the screen itself is
+		moving with Mario. In the Sprite class, Mario has a few main functions; notably, he has move and jump functions
+		the latter of which functions with respect to an SDL timer that gives him the ability to nearly fly. His class
+		also includes a grow and a shrink function that allow him to interact with mushrooms, giving him an additional
+		hit point. The Block class primarily focuses on a function isOn(), a bool value which allows it to determine
+		whether or not Mario is standing on top of it and as such holds him up. The Mushroom object is similar in that
+		it has a function to determine whether or not it is touched, and if it is, to change Mario's sprite and give him
+		an additional hit point. Scenery is simply a primarily constructor-based class in which given coordinates draw
+		clouds in order to spice up the map. The Goomba class and Turtle class are primarily the same, apart from the fact
+		that turtle has an additional state in which it is hit once, and it must stay in the shell and loses the ability to
+		activate its move function. The Level class terminates when Mario is either killed or reaches the end line, upon
+		which events the while loop terminates, and one of two appropriate messages is given to the user, signaling the
+		game's end.
 
+	*Testing
+		As one would likely guess,
 
 -Special Library Inclusion:
 	For this project, as far as special downloads needed, one must include the SDL2 library for graphics
