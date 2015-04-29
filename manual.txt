@@ -87,9 +87,13 @@
 	* Despite efforts to fix it, enemies still spawn between the end of level stairway and the flag. We decided to not
 		work towards changing this as the enemies in this location are not relevant and simply serve as scenery.
 
-Link:
+Etc:
 	Github Repo: https://github.com/bdevorem/FinalProject
 	TimeLog is the pasted Excel chart containing our time contributions,
 	MeetingLog is the pasted Word doc containing writeups of any multi-person face-to-face meeting. All other
 		project time was contributed while working alone, the vast majority of the work.
 	
+	*Note: Tallis's Github account became detached from the repository when posting. While it claims that he has fewer
+		than 10 contributions in his account, be sure to see in the repository that many posts game from Tallis Earl
+		Bowers, even though they were not associated with his official account. He did a lot of coding, and should
+		definitely receive credit for it.
