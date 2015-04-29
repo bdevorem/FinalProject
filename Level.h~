@@ -250,8 +250,7 @@ void Level::playLevel() {
 				for(int i = 0; i < numGoombas; i++)  {
 					goomba[i].moveGoomba();
 				}
-				
-////////////////////////////				
+						
 				newTurtle = turtle[0].makeNewTurtle();
 				
 				if(newTurtle == true){
@@ -263,7 +262,7 @@ void Level::playLevel() {
 				for(int i = 0; i < numTurtles; i++)  {
 					turtle[i].moveTurtle();
 				}
-/////////////////////////////				
+						
 			}//end while
 		if(!quit)
 			usleep(2000000);

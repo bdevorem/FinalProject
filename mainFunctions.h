@@ -23,6 +23,7 @@ SDL_Surface* walkImage = NULL; //The jumping image loads
 SDL_Surface* blockImage = NULL; //The jumping image loads
 SDL_Surface* goombaImage = NULL; //The jumping image loads
 SDL_Surface* turtleImage = NULL; //The jumping image loads
+SDL_Surface* shellImage = NULL; //The jumping image loads
 
 bool init() {
 	bool success = true;//Initialization flag
@@ -67,7 +68,10 @@ bool loadMedia() {
 	if( goombaImage == NULL )
 		success = false;
 	turtleImage = SDL_LoadBMP( "turtle.bmp" );
-	if( goombaImage == NULL )
+	if( turtleImage == NULL )
+		success = false;
+	shellImage = SDL_LoadBMP( "shell.bmp" );
+	if( shellImage == NULL )
 		success = false;
 
 	return success;
