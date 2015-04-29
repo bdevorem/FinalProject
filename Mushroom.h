@@ -1,5 +1,5 @@
 //Mushroom.h
-//nicholascjones
+//Tally
 
 #include <SDL2/SDL.h>
 
@@ -9,9 +9,9 @@
 class Mushroom {
 	
 	public:
-		Mushroom();
-		bool isTouch(int, int);
-		void setX(int);
+		Mushroom();  // default constructor
+		bool isTouch(int, int);  // if its being touched
+		void setX(int);  // love those get and set
 		void setY(int);
 		int getX();
 		int getY();
@@ -20,8 +20,8 @@ class Mushroom {
 
 	private:
 		int X;
-		int Y;
-		int width;
+		int Y;     // coordinates of location
+		int width; // size of shroom
 		int height;
 
 };
@@ -35,24 +35,26 @@ Mushroom::Mushroom()  {
 }
 
 bool Mushroom::isTouch(int Xpos, int Ypos)  {
-	if(Y == Ypos+height)
+	if(Y == Ypos+height)                    // if it is touched on bottom
 		if(Xpos >= X && Xpos <= X+width)
 			return true;
 
-	if(Y == Ypos)
+	if(Y == Ypos)                            // touched on top
 		if(Xpos >= X && Xpos <= X+width)
 			return true;
 
-	if(X == Xpos)
+	if(X == Xpos)                              // touched on left
 		if(Ypos >= Y && Ypos <= Y+height)
 			return true;
 
-	if(X == Xpos + width)
+	if(X == Xpos + width)                      // touched by an angel
 		if(Ypos >= Y && Ypos <= Y+height)
 			return true;
 
 	return false;
 }
+
+/////////////      Set AND Get      NUFF SAID   /////////////////////
 
 void Mushroom::setX(int a)  {
 	X = a;

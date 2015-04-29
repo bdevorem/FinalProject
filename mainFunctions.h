@@ -19,22 +19,20 @@ SDL_Surface* gScreenSurface = NULL; //The surface contained by the window
 SDL_Surface* gImage = NULL;//The image we will load and show on the screen
 SDL_Surface* heroImage = NULL; //The hero image will load
 SDL_Surface* jumpImage = NULL; //The jumping image loads
-SDL_Surface* walkImage = NULL; //The jumping image loads
-SDL_Surface* blockImage = NULL; //The jumping image loads
-SDL_Surface* goombaImage = NULL; //The jumping image loads
-SDL_Surface* turtleImage = NULL; //The jumping image loads
-SDL_Surface* shellImage = NULL; //The jumping image loads
-SDL_Surface* deadImage = NULL; //The jumping image loads
-SDL_Surface* winImage = NULL; //The jumping image loads
-SDL_Surface* loseImage = NULL; //The jumping image loads
-SDL_Surface* lives2Image = NULL; //The jumping image loads
-SDL_Surface* lives1Image = NULL; //The jumping image loads
-SDL_Surface* shroomImage = NULL; //The jumping image loads
-SDL_Surface* herogImage = NULL; //The jumping image loads
-SDL_Surface* walkgImage = NULL; //The jumping image loads
-SDL_Surface* jumpgImage = NULL; //The jumping image loads
-SDL_Surface* cloudImage = NULL; //The jumping image loads
-SDL_Surface* flagImage = NULL; //The jumping image loads
+SDL_Surface* walkImage = NULL; //The walking image loads
+SDL_Surface* blockImage = NULL; //The block image loads
+SDL_Surface* goombaImage = NULL; //The goomba image loads
+SDL_Surface* turtleImage = NULL; //The turtle image loads
+SDL_Surface* shellImage = NULL; //The shell image loads
+SDL_Surface* deadImage = NULL; //The dead image loads
+SDL_Surface* winImage = NULL; //The win image loads
+SDL_Surface* loseImage = NULL; //The lose image loads
+SDL_Surface* shroomImage = NULL; //The mushroom image loads
+SDL_Surface* herogImage = NULL; //The green mario image loads
+SDL_Surface* walkgImage = NULL; //The green walking image loads
+SDL_Surface* jumpgImage = NULL; //The green jumping image loads
+SDL_Surface* cloudImage = NULL; //The cloud image loads
+SDL_Surface* flagImage = NULL; //The flag image loads
 
 bool init() {
 	bool success = true;//Initialization flag
@@ -95,12 +93,6 @@ bool loadMedia() {
 		success = false;
 	loseImage = SDL_LoadBMP( "lose.bmp" );
 	if( loseImage == NULL )
-		success = false;
-	lives2Image = SDL_LoadBMP( "2lives.bmp" );
-	if( lives2Image == NULL )
-		success = false;
-	lives1Image = SDL_LoadBMP( "lives1.bmp" );
-	if( lives1Image == NULL )
 		success = false;
 	herogImage = SDL_LoadBMP( "mario2.bmp" );
 	if( herogImage == NULL )

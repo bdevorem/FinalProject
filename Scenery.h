@@ -1,4 +1,5 @@
 //Scenery.h
+//Thanks for those dope clouds Riley
 #include <SDL2/SDL.h>
 #include <stdlib.h>
 #include <time.h>
@@ -7,7 +8,9 @@
 
 class Scenery {
 public:
-	Scenery();
+	///////Prototypes for functions///////
+
+	Scenery(); //default constructor
 	int getX();
 	int getY();
 	void setX(int);
@@ -15,6 +18,7 @@ public:
 	int getHeight();
 
 private:
+	/////Variables for Scenery declared//////
 	int x;
 	int y;
 	int width;
@@ -23,12 +27,14 @@ private:
 
 #endif
 
-Scenery::Scenery() {
+Scenery::Scenery() { //Default constructor, set intial position for clouds and the dimensions of the cloud image
 	x = 0;
 	y = 25;
 	width = 196;
 	height = 149;
 }
+
+////////Get and set functions simply return a variable or set the variable///////////////
 
 void Scenery::setX(int a) {
 	x = a;

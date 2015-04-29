@@ -1,5 +1,5 @@
 //Block.h
-//nicholascjones
+//Tallis
 
 #include <SDL2/SDL.h>
 
@@ -9,27 +9,27 @@
 class Block {
 
 	public:
-		Block(int = 0, int = 0); //non-default constructor
-		bool isHit(int, int);
+		Block(int = 0, int = 0); //non-default constructor with fallback values
+		bool isHit(int, int); // function used to see if a block is hit from below 
 		void setXpos(int);
 		int getXpos();
-		int getYpos();
+		int getYpos();  // these functions do what you would guess
 		int getWidth();
 		int getHeight();
 		void setYpos(int);
-		bool isOn(int, int);
-		bool isHitLeft(int, int);
+		bool isOn(int, int); // top touch of block
+		bool isHitLeft(int, int);  // side touches
 		bool isHitRight(int, int);
 
 	private:
-		int Xpos;
+		int Xpos;  // coordinates of upper left of block
 		int Ypos;
-		int width;
+		int width; // size of blocks are all the same
 		int height;
 };
 #endif
 
-Block::Block(int x, int y)  {
+Block::Block(int x, int y)  {  // very simple constructor
 
 	Xpos = x;
 	Ypos = y;
@@ -37,6 +37,9 @@ Block::Block(int x, int y)  {
 	height = 20;
 
 }
+
+// The following are those functions you put into every class you make because you don't want to think about
+// the hard stuff, and you know you will need them.
 
 void Block::setXpos(int a)  {
 	Xpos = a;
@@ -62,13 +65,15 @@ int Block::getHeight()  {
 	return(height);
 }
 
+// all of the touch functions for block return bools like every other touch in every other class
+
 bool Block::isHit(int marioX, int marioY)  {
 
 	if(marioY == Ypos+height)
 		if(marioX >= Xpos && marioX <= Xpos+width)
-			return(1);
+			return true;
 
-	return(0);
+	return false;
 }
 
 bool Block::isOn(int X, int Y)  {
