@@ -45,10 +45,16 @@
 		that turtle has an additional state in which it is hit once, and it must stay in the shell and loses the ability to
 		activate its move function. The Level class terminates when Mario is either killed or reaches the end line, upon
 		which events the while loop terminates, and one of two appropriate messages is given to the user, signaling the
-		game's end.
+		game's end. 
 
 	*Testing
-		As one would likely guess,
+		As one would likely guess, our group performed the testing of this project through a sickeningly large amount of
+		playing our own game, to the point of it not being fun to us whatsoever anymore. Throughout the process, we
+		were forced to strategically play the game to try to get certain outcomes, one example being trying to kill
+		enemies and then seeing if their invisible "remnants" could still cause us damage as a result of the coordinates,
+		and another outcome being to see what happened with multiple enemies colliding. We performed secondary testing
+		by commenting out plenty of lines of code and trying to use cause and effect to pinpoint early bugs (and even late
+		bugs, see "Known Bugs") and their effects on the program.
 
 -Special Library Inclusion:
 	For this project, as far as special downloads needed, one must include the SDL2 library for graphics
@@ -56,7 +62,7 @@
 
 -Instructions for Building and Compiling Program:
 	In order to compile our program, one must download all of the files from our our Github repository 
-	(https://github.com/bdevorem/FinalProject), and use the make command, which utilizes the Makefile we
+	(https://github.com/bdevorem/FinalProject), and use the "make" command, which utilizes the Makefile we
 	created for the purposes of this project.
 
 -Controls and Instructions:
@@ -80,4 +86,10 @@
 		to the fact that it makes the game less predictable and moderately more challenging.
 	* Despite efforts to fix it, enemies still spawn between the end of level stairway and the flag. We decided to not
 		work towards changing this as the enemies in this location are not relevant and simply serve as scenery.
+
+Link:
+	Github Repo: https://github.com/bdevorem/FinalProject
+	TimeLog is the pasted Excel chart containing our time contributions,
+	MeetingLog is the pasted Word doc containing writeups of any multi-person face-to-face meeting. All other
+		project time was contributed while working alone, the vast majority of the work.
 	
