@@ -12,17 +12,16 @@ class Goomba {
 		Goomba(); //default constructor w/ x and y position
 		void moveGoomba(); //moves enemy
 		bool isOn(int, int); //if mario is on goomba
-		int getX();
-		int getY();
+		int getX(); //returns x
+		int getY(); //same
 		void setX(int);
-		bool dead();
+		bool dead(); //returns alive variable
 		void setAlive();
-		void displayLives();
-		bool isHitLeft(int, int);
-		bool isHitRight(int, int);
+		bool isHitLeft(int, int); //checks if it is hit on the left
+		bool isHitRight(int, int); //on the right
 		void setMoveVar(int);
-		bool makeNewGoomba();
-		void setNewGoomba(bool);
+		bool makeNewGoomba(); //make a new goomba
+		void setNewGoomba(bool); //set the variable
 		int getMoveVar();		
 
 	private:
@@ -39,7 +38,7 @@ class Goomba {
 #endif
 Goomba::Goomba() {
 
-	srand(time(NULL));
+	srand(time(NULL)); //seed time
 	
 	x = 576;
 	y = 302;
@@ -55,12 +54,10 @@ void Goomba::moveGoomba() { //moves enemy
 
 	if(moveVar == 1){
 		//counter++; //goomba is SUPER fast, so fix this without making coordinates floats
-	
 		if(counter%5 == 0)
 			x -= 1;
 	}
 	else if(moveVar == -1)  {
-
 		if(counter%5 == 0)
 			x += 1;
 	}
@@ -68,7 +65,7 @@ void Goomba::moveGoomba() { //moves enemy
 
 bool Goomba::isOn(int xpos, int ypos) {
 
-	if(ypos == y)
+	if(ypos == y) //if the entered coords are on top of goomba
 		if( xpos >= x && xpos <= x+width)
 			return true;
 	return false;
@@ -82,7 +79,7 @@ int Goomba::getY() { //gives mario's y coordinate
 	return y;
 }
 
-bool Goomba::dead(){
+bool Goomba::dead(){ //return opposite of alive
 	return !alive;
 }
 
@@ -94,11 +91,7 @@ void Goomba::setAlive(){
 	alive = false;
 }
 
-void Goomba::displayLives(){
-	/////////////////////////////add stuff//////////////////
-}
-
-bool Goomba::isHitLeft(int Xpos, int Ypos) {
+bool Goomba::isHitLeft(int Xpos, int Ypos) { //these are the same as in the turtle
 
 	if(Xpos == x)
 		if(Ypos >= y && Ypos <= y+height)
@@ -119,6 +112,10 @@ void Goomba::setMoveVar(int i){
 }
 
 bool Goomba::makeNewGoomba(){
+	/*
+	If you are looking at this function before the similar one in Turtle, please view that first to enjoy Breanna's long speech
+	that was a product of 10 shots of espresso, lack of precious sleep, and hysterical laughing from how far this project has gotten.
+	*/
 
 	int temp = rand()%1000000;	
 	

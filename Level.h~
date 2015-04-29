@@ -20,16 +20,16 @@ using namespace std;
 class Level {
 public:
 	Level();
-	void playLevel();
+	void playLevel(); //play the level, like the title implies
 	void display(); //displays on screen based on outputs
-	void checksMario();
-	void checksEnemy();
-	void scrollScreen();
+	void checksMario(); //i wonder what this does
+	void checksEnemy(); //samzies
+	void scrollScreen(); //this scrolls the screen, who knew
 
 protected:
-	Sprite sp;
+	Sprite sp; //instantiate dat 
 
-	int numBlocks;
+	int numBlocks; //initialtize all stuffs
 	Block blk[50];
 	SDL_Rect blockRect[50];
 	SDL_Rect blockSrcRect[50];
@@ -71,7 +71,7 @@ protected:
 #endif
 
 Level::Level() {
-	mapDistMove = 0;
+	mapDistMove = 0; //more initiliaztion
 	numBlocks = 50;
 	numGoombas = 2;
 	numShrooms = 1;
@@ -102,7 +102,7 @@ Level::Level() {
 	shroom[0].setY(10);
 	gotShroom[0] = false;
 
-	blk[0].setXpos(100);
+	blk[0].setXpos(100); //set positions for all blocks
 	blk[0].setYpos(210);
 	blk[1].setXpos(120);
 	blk[1].setYpos(210);
@@ -165,11 +165,11 @@ Level::Level() {
 	blk[28].setYpos(245);
 	// face figure in blocks
 	blk[29].setXpos(2400);
-	blk[29].setYpos(250);
+	blk[29].setYpos(270);
 	blk[30].setXpos(2420);
 	blk[30].setYpos(270);
 	blk[31].setXpos(2440);
-	blk[31].setYpos(250);
+	blk[31].setYpos(270);
 	blk[32].setXpos(2420);
 	blk[32].setYpos(190);
 	blk[33].setXpos(2500);
@@ -219,7 +219,7 @@ Level::Level() {
 		h += 300;
 	}
 
-	for(int i = 0; i < 500; i++){
+	for(int i = 0; i < 500; i++){ //turtles
 		turtle[i].setX(570);
 	}
 
@@ -228,7 +228,7 @@ Level::Level() {
 void Level::playLevel() {
 	bool quit = false;
 
-	if( !init() ){
+	if( !init() ){ //all dat SDL stuff
 		printf( "Failed to initialize!\n" );
 	} else {
 		//Load media
@@ -240,7 +240,7 @@ void Level::playLevel() {
 			while(sp.getAliveStatus() && sp.getX() < 3210 - mapDistMove && !quit)  {
 				while( SDL_PollEvent( &e ) != 0 ){//Handle events on queue
 
-					switch(e.type){
+					switch(e.type){ //let user use arrows
 
 					case SDL_QUIT: //User requests quit
 						quit = true;
@@ -271,30 +271,30 @@ void Level::playLevel() {
 					}//end switch
 
 				}//end while
-				sp.jump();
+				sp.jump(); //call all important functions
 				checksMario();
 				sp.move();
 				checksEnemy();
 				scrollScreen();
 				display();
 
-				newGoomba = goomba[0].makeNewGoomba();
+				newGoomba = goomba[0].makeNewGoomba(); //weird, elaborate way to make new goombas
 
 				if(newGoomba == true){
-					newGoomba = false;
+					newGoomba = false; //reset all variables
 					goomba[0].setNewGoomba(false);
-					
+					 //unless there is overlapping of monsters, make new goomba!
 					if(goomba[numGoombas].getX() - goomba[numGoombas-1].getX() > 30 && goomba[numGoombas].getX() - turtle[numTurtles-1].getX() > 30)
-					numGoombas++;
+					numGoombas++; //increment
 
 					
 				}
 
-				for(int i = 0; i < numGoombas; i++)  {
+				for(int i = 0; i < numGoombas; i++)  { //move that little goomba woomba
 					goomba[i].moveGoomba();
 				}
 
-				newTurtle = turtle[0].makeNewTurtle();
+				newTurtle = turtle[0].makeNewTurtle(); //same thing for turtles
 
 				if(newTurtle == true){
 					newTurtle = false;
@@ -310,6 +310,7 @@ void Level::playLevel() {
 				}
 
 			}//end while
+
 			if(!quit) {
 			usleep(2000000);
 			SDL_Event f;
@@ -346,7 +347,7 @@ void Level::display() { //displays Sprite
 
 	SDL_Rect heroSrcRect = sp.getHeroSrcRect();
 	SDL_Rect heroRect = sp.getHeroRect();
-	for(int i = 0; i < numClouds; i++)  {
+	for(int i = 0; i < numClouds; i++)  { //display clouds
 		cloudRect[i].x = cloud[i].getX();
 		cloudRect[i].y = cloud[i].getY();
 		cloudSrcRect[i].w = cloud[i].getWidth();
@@ -357,7 +358,7 @@ void Level::display() { //displays Sprite
 	}
 	SDL_BlitSurface( flagImage, &flagSrcRect, gScreenSurface, &flagRect ); 
 
-	for(int i = 0; i < numShrooms; i++)  {
+	for(int i = 0; i < numShrooms; i++)  { //display mushrooms
 		if(!gotShroom[i])  {
 			shroomRect[i].x = shroom[i].getX();
 			shroomRect[i].y = shroom[i].getY();
@@ -369,7 +370,7 @@ void Level::display() { //displays Sprite
 		}
 	}
 
-	for(int i = 0; i < numBlocks; i++)  {
+	for(int i = 0; i < numBlocks; i++)  { //display blocks
 		blockRect[i].x = blk[i].getXpos();
 		blockRect[i].y = blk[i].getYpos();
 		blockSrcRect[i].w = blk[i].getWidth();
@@ -380,7 +381,7 @@ void Level::display() { //displays Sprite
 	}
 
 
-	for(int i = 0; i < numGoombas; i++)  {
+	for(int i = 0; i < numGoombas; i++)  { //display goombas
 		goombaRect[i].x = goomba[i].getX();
 		goombaRect[i].y = 302;
 		goombaSrcRect[i].w = 24;
@@ -389,11 +390,11 @@ void Level::display() { //displays Sprite
 		goombaSrcRect[i].y = 0;
 
 
-		if(goomba[i].dead() == false)	
+		if(goomba[i].dead() == false)	//do not display image if the goomba is dead
 			SDL_BlitSurface( goombaImage, &goombaSrcRect[i], gScreenSurface, &goombaRect[i] );
 	}
 
-	for(int i = 0; i < numTurtles; i++)  {
+	for(int i = 0; i < numTurtles; i++)  { //similar thing for turtles
 		turtleRect[i].x = turtle[i].getX();
 		turtleRect[i].y = 302;
 		turtleSrcRect[i].w = 24;
@@ -411,7 +412,7 @@ void Level::display() { //displays Sprite
 
 	
 
-	if(sp.getAliveStatus())  {
+	if(sp.getAliveStatus())  { //display marioooo
 		if(sp.inAir()) {
 			if (sp.isBig()) {
 				SDL_BlitSurface( jumpgImage, &heroSrcRect, gScreenSurface, &heroRect );
@@ -458,11 +459,11 @@ void Level::display() { //displays Sprite
 
 void Level::checksMario()  {
 
-	for(int i = 0; i < numBlocks; i++)  {
+	for(int i = 0; i < numBlocks; i++)  {//if mario hits a block
 		if(blk[i].isHit(sp.getX()+4, sp.getY()) || blk[i].isHit(sp.getX()+20, sp.getY()))
-			sp.setDirection(-1);
+			sp.setDirection(-1); //reset his direction
 
-		if(blk[i].isOn(sp.getX()+4, sp.getY()+32) || blk[i].isOn(sp.getX()+20, sp.getY()+32)) {
+		if(blk[i].isOn(sp.getX()+4, sp.getY()+32) || blk[i].isOn(sp.getX()+20, sp.getY()+32)) {//if mario is on top of block
 			sp.setDirection(0);
 			sp.resetJumpCounter();
 		}
@@ -475,7 +476,7 @@ void Level::checksMario()  {
 
 	}
 
-	for(int j = 0; j < numShrooms; j++)  
+	for(int j = 0; j < numShrooms; j++)  //if mario gets the mushroom, make him into Luigi!
 		if(shroom[j].isTouch(sp.getX(), sp.getY()) || shroom[j].isTouch(sp.getX()+24, sp.getY()) || shroom[j].isTouch(sp.getX(), sp.getY()+32) || shroom[j].isTouch(sp.getX(), sp.getY()+32))  {
 			sp.grow();
 			gotShroom[j] = true;
@@ -484,26 +485,26 @@ void Level::checksMario()  {
 
 void Level::checksEnemy()  {
 
-	for(int i = 0; i < numGoombas; i++)  {
+	for(int i = 0; i < numGoombas; i++)  {//all the checks for goomba
 
 		if(!goomba[i].dead() && goomba[i].isOn(sp.getX(), sp.getY()+32) || goomba[i].isOn(sp.getX()+24, sp.getY()+32)) {
-			goomba[i].setAlive();
+			goomba[i].setAlive();//kill goomba if mario lands on top of him
 			sp.setDirection(1);
 		}
 
 		if(!goomba[i].dead() && goomba[i].isHitLeft(sp.getX()+24, sp.getY()+16)){
-			sp.damage();
-			if(sp.getAliveStatus())
+			sp.damage(); //give damage to mario if he hits the left side of goomba
+			if(sp.getAliveStatus()) //check if mario is luigi, because then he does not die
 				goomba[i].setAlive();
 		}
 
-		if(!goomba[i].dead() && goomba[i].isHitRight(sp.getX(), sp.getY()+16)){
+		if(!goomba[i].dead() && goomba[i].isHitRight(sp.getX(), sp.getY()+16)){//same thing but for right side
 			sp.damage();
 			if(sp.getAliveStatus())
 				goomba[i].setAlive();
 		}
 		
-		for(int j = 0; j < numBlocks; j++)  {
+		for(int j = 0; j < numBlocks; j++)  {//if goomba hits a block, change direction
 			if(!goomba[i].dead() && goomba[i].isHitLeft(blk[j].getXpos()+20, blk[j].getYpos())){
 				goomba[i].setMoveVar(-goomba[i].getMoveVar());
 			}
@@ -551,30 +552,30 @@ void Level::checksEnemy()  {
 	}
 
 
-	for(int i = 0; i < numTurtles; i++)  {
+	for(int i = 0; i < numTurtles; i++)  { //all the checks for turtles
 		if(turtle[i].dead() == 0)
-			turtle[i].setX(-20);
+			turtle[i].setX(-20);//first turtle is a mystery, so make it disappear!
 		if(turtle[i].dead() != 0 && turtle[i].isOn(sp.getX(), sp.getY()+32) || turtle[i].isOn(sp.getX()+24, sp.getY()+32)) {
-			turtle[i].damage();
+			turtle[i].damage(); //give turtle damage if mario is on top of him
 			sp.setDirection(1);
 		}
 
 		if(turtle[i].dead() != 0 && turtle[i].isHitLeft(sp.getX()+24, sp.getY()+16)){
 			sp.damage();
-			if(sp.getAliveStatus())  {
+			if(sp.getAliveStatus())  { //if mario is currently luigi
 				turtle[i].damage();
 				turtle[i].damage();
 			}
 		}
 
-		if(turtle[i].dead() != 0 && turtle[i].isHitRight(sp.getX(), sp.getY()+16)){
+		if(turtle[i].dead() != 0 && turtle[i].isHitRight(sp.getX(), sp.getY()+16)){ //same thing, but for right side
 			sp.damage();
 			if(sp.getAliveStatus())  {
 				turtle[i].damage();
 				turtle[i].damage();
 			}
 		}
-		for(int j = 0; j < numBlocks; j++)  {
+		for(int j = 0; j < numBlocks; j++)  { //if turtle runs into blocks, change direction
 			if(turtle[i].dead() !=0 && turtle[i].isHitLeft(blk[j].getXpos()+20, blk[j].getYpos())){
 				turtle[i].setMoveVar(-turtle[i].getMoveVar());
 			}
@@ -584,7 +585,6 @@ void Level::checksEnemy()  {
 			}
 		}
 
-		///////////////////////////////////////////////
 		//if in shell and is hit on the right by the next turtles
 		for(int k = i+1; k < numTurtles; k++){
 			if(turtle[i].dead() != 0 && turtle[i].isHitRight(turtle[k].getX(), turtle[k].getY())){
@@ -608,34 +608,35 @@ void Level::checksEnemy()  {
 
 }
 
-void Level::scrollScreen()  {
+void Level::scrollScreen()  { //function to scroll the screen
 
-	if(sp.getX() > 350)  {
-		mapDistMove += sp.getX() - 350;
-
-		for(int i = 0; i < numBlocks; i++)  {
-			blk[i].setXpos(blk[i].getXpos() - sp.getX() + 350);
+	if(mapDistMove < 2650)  {
+		if(sp.getX() > 350)  {
+			mapDistMove += sp.getX() - 350;
+	
+			for(int i = 0; i < numBlocks; i++)  {
+				blk[i].setXpos(blk[i].getXpos() - sp.getX() + 350);
+			}
+	
+			for(int i = 0; i < numGoombas; i++)  {
+				goomba[i].setX(goomba[i].getX() - sp.getX() + 350);
+			}
+	
+			for(int i = 0; i < numTurtles; i++)  {
+				turtle[i].setX(turtle[i].getX() - sp.getX() + 350);
+			}
+	
+			for(int i = 0; i < numShrooms; i++)  {
+				shroom[i].setX(shroom[i].getX() - sp.getX() + 350);
+			}
+	
+			for(int i = 0; i < numClouds; i++)  {
+				cloud[i].setX(cloud[i].getX() - sp.getX() + 350);
+			}
+			flagRect.x = flagRect.x - sp.getX() + 350;
+			sp.setX(350);
 		}
-
-		for(int i = 0; i < numGoombas; i++)  {
-			goomba[i].setX(goomba[i].getX() - sp.getX() + 350);
-		}
-
-		for(int i = 0; i < numTurtles; i++)  {
-			turtle[i].setX(turtle[i].getX() - sp.getX() + 350);
-		}
-
-		for(int i = 0; i < numShrooms; i++)  {
-			shroom[i].setX(shroom[i].getX() - sp.getX() + 350);
-		}
-
-		for(int i = 0; i < numClouds; i++)  {
-			cloud[i].setX(cloud[i].getX() - sp.getX() + 350);
-		}
-		flagRect.x = flagRect.x - sp.getX() + 350;
-		sp.setX(350);
 	}
-
 }
 
 
