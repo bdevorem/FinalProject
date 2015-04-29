@@ -129,7 +129,7 @@ void Turtle::setMoveVar(int i){
 bool Turtle::makeNewTurtle(){
 	int temp = rand()%1000000;	
 
-	if(temp > 999500) //less turtles than goombas
+	if(temp > 999300) //less turtles than goombas
 		return true;
 	else
 		return false;

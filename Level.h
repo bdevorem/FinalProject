@@ -273,9 +273,9 @@ void Level::playLevel() {
 					newGoomba = false;
 					goomba[0].setNewGoomba(false);
 					
-					if(goomba[numGoombas].getX() - goomba[numGoombas-1].getX() > 50 || goomba[numGoombas].getX() - turtle[numTurtles-1].getX() > 50){
-						numGoombas++;
-					}
+					if(goomba[numGoombas].getX() - goomba[numGoombas-1].getX() > 30 && goomba[numGoombas].getX() - turtle[numTurtles-1].getX() > 30)
+					numGoombas++;
+
 					
 				}
 
@@ -289,9 +289,9 @@ void Level::playLevel() {
 					newTurtle = false;
 					turtle[0].setNewTurtle(false);
 					
-					if(turtle[numTurtles].getX() - turtle[numTurtles-1].getX() > 50 || turtle[numTurtles].getX() - goomba[numGoombas-1].getX() > 50){
-						numTurtles++;
-					}
+					if(turtle[numTurtles].getX() - turtle[numTurtles-1].getX() > 30 && turtle[numTurtles].getX() - goomba[numGoombas-1].getX() > 30)
+					numTurtles++;
+
 				}
 
 				for(int i = 0; i < numTurtles; i++)  {
@@ -523,13 +523,14 @@ void Level::checksEnemy()  {
 		for(int y = 0; y < numTurtles; y++){
 			if(!goomba[i].dead() && goomba[i].isHitLeft(turtle[y].getX()+24, turtle[y].getY())){
 				goomba[i].setMoveVar(-goomba[i].getMoveVar());
-				turtle[y].setMoveVar(-turtle[y].getMoveVar());
+				//turtle[y].setMoveVar(-turtle[y].getMoveVar());
+				if(turtle[y].dead() == 1) turtle[y].setPushed(true);
 			}
 			
 
 			if(!goomba[i].dead() && goomba[i].isHitRight(turtle[y].getX(), turtle[y].getY()+16)){
 				goomba[i].setMoveVar(-goomba[i].getMoveVar());
-				turtle[y].setMoveVar(-turtle[y].getMoveVar());
+				//turtle[y].setMoveVar(-turtle[y].getMoveVar());
 			}
 		
 		}//end for
@@ -571,43 +572,6 @@ void Level::checksEnemy()  {
 				turtle[i].setMoveVar(-turtle[i].getMoveVar());
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	/*	////////////////////////////////
-
-		/*		for(int n = 0; n < numGoombas; n++){
-
-				if(turtle[i].dead() != 0 && turtle[i].isHitLeft(goomba[n].getX()+24, goomba[n].getY())){
-						if(turtle[i].dead() == 1) turtle[i].setPushed(true);
-						else turtle[i].setMoveVar(-turtle[i].getMoveVar());
-				}
-
-			}
-
-		//if in shell and is hit on the left by the previous turtles
-		for(int l = 0; l < numTurtles; l++){
-			if(turtle[i].dead() != 0 && turtle[i].isHitLeft(turtle[l].getX()+24, turtle[l].getY())){
-				if(turtle[i].dead() == 1) turtle[i].setPushed(true);
-				else turtle[i].setMoveVar(-turtle[i].getMoveVar());
-			}
-		}
 
 		///////////////////////////////////////////////
 		//if in shell and is hit on the right by the next turtles
@@ -627,18 +591,7 @@ void Level::checksEnemy()  {
 
 		}
 
-*/
-		////////////////////////////////
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+////////////////////////////////////////////////////
 
 	}
 
