@@ -411,40 +411,43 @@ void Level::checksEnemy()  {
 			}
 		}
 		////////////////////////////////
-		//if in shell and is hit on the right by the next turtles
-		for(int k = i+1; k < numTurtles; k++){
-			if(turtle[i].dead() == 1 && turtle[i].isHitRight(turtle[k].getX(), turtle[k].getY())){
-				turtle[i].setPushed(true);
-			}
-		}
-		
-		//if in shell and is hit on the right/left by goombas
-		for(int m = 0; m < numGoombas; m++){
-			if(turtle[i].dead() == 1 && turtle[i].isHitRight(goomba[m].getX(), goomba[m].getY())){
-				turtle[i].setPushed(true);
-			}
-			
-		}
-		
-		
+	
 	/*		for(int n = 0; n < numGoombas; n++){
 			
-				if(turtle[i].dead() == 1 && turtle[i].isHitLeft(goomba[n].getX()+24, goomba[n].getY())){
-						turtle[i].setPushed(true);
-						turtle[i].setMoveVar(-turtle[i].getMoveVar());
+				if(turtle[i].dead() != 0 && turtle[i].isHitLeft(goomba[n].getX()+24, goomba[n].getY())){
+						if(turtle[i].dead() == 1) turtle[i].setPushed(true);
+						else turtle[i].setMoveVar(-turtle[i].getMoveVar());
 				}
 				
 			}*/
 			
 			//if in shell and is hit on the left by the previous turtles
-			for(int l = i-1; l >= 0; l--){
-				if(turtle[i].dead() == 1 && turtle[i].isHitLeft(turtle[l].getX()+24, turtle[l].getY())){
-					turtle[i].setPushed(true);
-					turtle[i].setMoveVar(-turtle[i].getMoveVar());
+			for(int l = 0; l < numTurtles; l++){
+				if(turtle[i].dead() != 0 && turtle[i].isHitLeft(turtle[l].getX()+24, turtle[l].getY())){
+					if(turtle[i].dead() == 1) turtle[i].setPushed(true);
+					else turtle[i].setMoveVar(-turtle[i].getMoveVar());
 				}
 			}
 			
-
+	///////////////////////////////////////////////		
+				//if in shell and is hit on the right by the next turtles
+		for(int k = i+1; k < numTurtles; k++){
+			if(turtle[i].dead() != 0 && turtle[i].isHitRight(turtle[k].getX(), turtle[k].getY())){
+				if(turtle[i].dead() == 1) turtle[i].setPushed(true);
+				else turtle[i].setMoveVar(-turtle[i].getMoveVar());
+			}
+		}
+		
+		//if in shell and is hit on the right/left by goombas
+		for(int m = 0; m < numGoombas; m++){
+			if(turtle[i].dead() != 0 && turtle[i].isHitRight(goomba[m].getX(), goomba[m].getY())){
+				if(turtle[i].dead() == 1) turtle[i].setPushed(true);
+				else turtle[i].setMoveVar(-turtle[i].getMoveVar());
+			}
+			
+		}
+		
+	
 		////////////////////////////////
 		
 	}
