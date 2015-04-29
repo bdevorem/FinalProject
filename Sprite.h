@@ -43,6 +43,7 @@ public:
 	bool getAliveStatus();
 	int getLives();
 	void setLives(int);
+	void setAlive();
 
 
 private:
@@ -91,24 +92,24 @@ Sprite::Sprite() { //default constructor
 int Sprite::jump() { //jump function
 
 
-		if(direction == 1)  {
-			jumpUp();
-			jumpCounter++;  }
-		if(direction == -1)  {
-			jumpDown();
-			jumpCounter = 0;  }
-		if(jumpCounter >= 150) {
-			setDirection(-1);
-		}
-		if(posY() > 295) {
-			setY(295);
-			setDirection(0);
-		}
+	if(direction == 1)  {
+		jumpUp();
+		jumpCounter++;  }
+	if(direction == -1)  {
+		jumpDown();
+		jumpCounter = 0;  }
+	if(jumpCounter >= 150) {
+		setDirection(-1);
+	}
+	if(posY() > 295) {
+		setY(295);
+		setDirection(0);
+	}
 
-		heroRect.y = posY();
-		if(posY() < 295 && direction == 0)
-			setDirection(-1);
-					
+	heroRect.y = posY();
+	if(posY() < 295 && direction == 0)
+		setDirection(-1);
+
 }		
 
 int Sprite::move() { //move function
@@ -120,10 +121,10 @@ int Sprite::move() { //move function
 			//jumpRect.x -= 1;
 		}
 	}
-        else if(moveVar == -1)  {
+	else if(moveVar == -1)  {
 		//if(heroRect.x < 600) {
-			heroRect.x += 1;
-			//jumpRect.x += 1;
+		heroRect.x += 1;
+		//jumpRect.x += 1;
 		//}
 	}
 }
@@ -230,4 +231,8 @@ void Sprite::setLives(int a) {
 
 int Sprite::getLives() {
 	return lives;
+}
+
+void Sprite::setAlive() {
+	alive = true;
 }

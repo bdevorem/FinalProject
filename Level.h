@@ -16,39 +16,40 @@ using namespace std;
 #define LEVEL_H
 
 class Level {
-	public:
-		Level();
-		void playLevel();
-		void display(); //displays on screen based on outputs
-		void checksMario();
-		void checksEnemy();
-		void scrollScreen();
-		
-	protected:
-		Sprite sp;
-		
-		int numBlocks;
-		Block blk[50];
-		SDL_Rect blockRect[50];
-		SDL_Rect blockSrcRect[50];
-		
-		int numGoombas;
-		Goomba goomba[500]; //500 is temp max
-		SDL_Rect goombaRect[500];
-		SDL_Rect goombaSrcRect[500];
-		bool newGoomba;
-		
-		int numTurtles;
-		Turtle turtle[500]; //500 is temp max
-		SDL_Rect turtleRect[500];
-		SDL_Rect turtleSrcRect[500];
-		bool newTurtle;
-		
-		SDL_Rect srcRect;
-		SDL_Rect dstRect;
-		int mapDistMove;
-		
-		
+public:
+	Level();
+	void playLevel();
+	void display(); //displays on screen based on outputs
+	void checksMario();
+	void checksEnemy();
+	void scrollScreen();
+
+protected:
+	Sprite sp;
+
+	int numBlocks;
+	Block blk[50];
+	SDL_Rect blockRect[50];
+	SDL_Rect blockSrcRect[50];
+
+	int numGoombas;
+	Goomba goomba[500]; //500 is temp max
+	SDL_Rect goombaRect[500];
+	SDL_Rect goombaSrcRect[500];
+	bool newGoomba;
+
+	int numTurtles;
+	Turtle turtle[500]; //500 is temp max
+	SDL_Rect turtleRect[500];
+	SDL_Rect turtleSrcRect[500];
+	bool newTurtle;
+
+	SDL_Rect srcRect;
+	SDL_Rect dstRect;
+	int mapDistMove;
+	int go;
+
+
 };
 #endif
 
@@ -179,7 +180,7 @@ Level::Level() {
 	for(int i = 0; i < 500; i++){
 		goomba[i].setX(570);//initialize all possible goombas
 	}
-	
+
 	for(int i = 0; i < 500; i++){
 		turtle[i].setX(570);
 	}
@@ -196,9 +197,9 @@ void Level::playLevel() {
 		if( !loadMedia() ){
 			printf( "Failed to load media!\n" );
 		} else {
-		SDL_Event e;//Event handler
+			SDL_Event e;//Event handler
 
-		while(sp.getAliveStatus() && sp.getX() < 3080 - mapDistMove && !quit)  {
+			while(sp.getAliveStatus() && sp.getX() < 3080 - mapDistMove && !quit)  {
 				while( SDL_PollEvent( &e ) != 0 ){//Handle events on queue
 
 					switch(e.type){
@@ -222,7 +223,7 @@ void Level::playLevel() {
 						}
 
 						break;
-						
+
 					case SDL_KEYUP:
 						if(e.key.keysym.sym == SDLK_LEFT)
 							sp.setMoveVar(0);
@@ -230,7 +231,7 @@ void Level::playLevel() {
 							sp.setMoveVar(0);
 						break;
 					}//end switch
-					
+
 				}//end while
 				sp.jump();
 				checksMario();
@@ -238,61 +239,69 @@ void Level::playLevel() {
 				checksEnemy();
 				scrollScreen();
 				display();
-				
+
 				newGoomba = goomba[0].makeNewGoomba();
-				
+
 				if(newGoomba == true){
 					newGoomba = false;
 					goomba[0].setNewGoomba(false);
 					numGoombas++;
 				}
-				
+
 				for(int i = 0; i < numGoombas; i++)  {
 					goomba[i].moveGoomba();
 				}
-						
+
 				newTurtle = turtle[0].makeNewTurtle();
-				
+
 				if(newTurtle == true){
 					newTurtle = false;
 					turtle[0].setNewTurtle(false);
 					numTurtles++;
 				}
-				
+
 				for(int i = 0; i < numTurtles; i++)  {
 					turtle[i].moveTurtle();
 				}
-						
+
 			}//end while
-		if(!quit)
+			if(!quit) {
 			usleep(2000000);
-	}	} // end elses
+			SDL_Event f;
+			SDL_Rect heroSrcRect = sp.getHeroSrcRect();
+			SDL_Rect heroRect = sp.getHeroRect();
+				while (go != 1) {
+					SDL_FillRect(gScreenSurface,NULL,0x000000);
+					SDL_BlitSurface( winImage, &srcRect, gScreenSurface, &dstRect ); //Apply the image
+					SDL_UpdateWindowSurface( gWindow );
+					while( SDL_PollEvent( &f ) != 0 ){//Handle events on queue
+						switch(f.type){
+						case SDL_KEYDOWN:
+							if(f.key.keysym.sym == SDLK_SPACE) {
+								go = 1;
+								close();
+								exit(1);
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+	} // end elses
 	close();
 }
 
 void Level::display() { //displays Sprite
 	jumpImage == NULL;
+	go = 0;
+	SDL_Event f;
 	SDL_FillRect(gScreenSurface,NULL,0x000000);
 	SDL_BlitSurface( gImage, &srcRect, gScreenSurface, &dstRect ); //Apply the image
 
 	SDL_Rect heroSrcRect = sp.getHeroSrcRect();
 	SDL_Rect heroRect = sp.getHeroRect();
-	if(sp.getAliveStatus())  {
-		if(sp.inAir())
-			SDL_BlitSurface( jumpImage, &heroSrcRect, gScreenSurface, &heroRect );	
-		else if(sp.getMoveVar()!= 0)
-			SDL_BlitSurface( walkImage, &heroSrcRect, gScreenSurface, &heroRect );
-		else
-			SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
-	} else  {
-		sp.setLives(sp.getLives()-1);
-		SDL_BlitSurface( deadImage, &heroSrcRect, gScreenSurface, &heroRect );	// he dead, change image to dead one
-		if (sp.getLives() == 0) {
-			//game over bruh, display screen
-		} else {
-			//display other screen
-		}
-	}
+
 
 	for(int i = 0; i < numBlocks; i++)  {
 		blockRect[i].x = blk[i].getXpos();
@@ -303,7 +312,7 @@ void Level::display() { //displays Sprite
 		blockSrcRect[i].y = 0;
 		SDL_BlitSurface( blockImage, &blockSrcRect[i], gScreenSurface, &blockRect[i] );
 	}
-	
+
 	for(int i = 0; i < numGoombas; i++)  {
 		goombaRect[i].x = goomba[i].getX();
 		goombaRect[i].y = 302;
@@ -311,8 +320,8 @@ void Level::display() { //displays Sprite
 		goombaSrcRect[i].h = 24;
 		goombaSrcRect[i].x = 0;
 		goombaSrcRect[i].y = 0;
-		
-		
+
+
 		if(goomba[i].dead() == false)	
 			SDL_BlitSurface( goombaImage, &goombaSrcRect[i], gScreenSurface, &goombaRect[i] );
 	}
@@ -324,13 +333,42 @@ void Level::display() { //displays Sprite
 		turtleSrcRect[i].h = 24;
 		turtleSrcRect[i].x = 0;
 		turtleSrcRect[i].y = 0;
-		
-		
+
+
 		if(turtle[i].dead() == 2) //alive image
 			SDL_BlitSurface( turtleImage, &turtleSrcRect[i], gScreenSurface, &turtleRect[i] );
 		else if(turtle[i].dead() == 1) //in shell image
 			SDL_BlitSurface( shellImage, &turtleSrcRect[i], gScreenSurface, &turtleRect[i] );
-			//if dead, no image is displayed
+		//if dead, no image is displayed
+	}
+
+	if(sp.getAliveStatus())  {
+		if(sp.inAir())
+			SDL_BlitSurface( jumpImage, &heroSrcRect, gScreenSurface, &heroRect );	
+		else if(sp.getMoveVar()!= 0)
+			SDL_BlitSurface( walkImage, &heroSrcRect, gScreenSurface, &heroRect );
+		else
+			SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
+	} else  {
+		SDL_BlitSurface( deadImage, &heroSrcRect, gScreenSurface, &heroRect );	// he dead, change image to dead one
+		SDL_UpdateWindowSurface( gWindow );
+		usleep(2000000);
+		while (go != 1) {
+			SDL_FillRect(gScreenSurface,NULL,0x000000);
+			SDL_BlitSurface( loseImage, &srcRect, gScreenSurface, &dstRect ); //Apply the image
+			SDL_UpdateWindowSurface( gWindow );
+			while( SDL_PollEvent( &f ) != 0 ){//Handle events on queue
+				switch(f.type){
+				case SDL_KEYDOWN:
+					if(f.key.keysym.sym == SDLK_SPACE) {
+						go = 1;
+						close();
+						exit(1);
+					}
+					break;
+				}
+			}
+		}
 	}
 
 	SDL_UpdateWindowSurface( gWindow );//Update the surface
@@ -352,7 +390,7 @@ void Level::checksMario()  {
 
 		if(blk[i].isHitRight(sp.getX(), sp.getY()+16) && sp.getMoveVar() == 1)
 			sp.setMoveVar(0);
-	
+
 	}
 }
 
@@ -363,12 +401,12 @@ void Level::checksEnemy()  {
 			goomba[i].setAlive();
 			sp.setDirection(1);
 		}
-		
+
 		if(!goomba[i].dead() && goomba[i].isHitLeft(sp.getX()+24, sp.getY()+16)){
 			sp.setMoveVar(0);
 			sp.damage();
 		}
-		
+
 		if(!goomba[i].dead() && goomba[i].isHitRight(sp.getX(), sp.getY()+16)){
 			sp.setMoveVar(0);
 			sp.damage();
@@ -377,14 +415,14 @@ void Level::checksEnemy()  {
 			if(!goomba[i].dead() && goomba[i].isHitLeft(blk[j].getXpos()+20, blk[j].getYpos())){
 				goomba[i].setMoveVar(-goomba[i].getMoveVar());
 			}
-		
+
 			if(!goomba[i].dead() && goomba[i].isHitRight(blk[j].getXpos(), blk[j].getYpos())){
 				goomba[i].setMoveVar(-goomba[i].getMoveVar());
 			}
 		}
 	}
-	
-	
+
+
 	for(int i = 0; i < numTurtles; i++)  {
 		if(turtle[i].dead() == 0)
 			turtle[i].setX(-20);
@@ -392,12 +430,12 @@ void Level::checksEnemy()  {
 			turtle[i].damage();
 			sp.setDirection(1);
 		}
-		
+
 		if(turtle[i].dead() != 0 && turtle[i].isHitLeft(sp.getX()+24, sp.getY()+16)){
 			sp.setMoveVar(0);
 			sp.damage();
 		}
-		
+
 		if(turtle[i].dead() != 0 && turtle[i].isHitRight(sp.getX(), sp.getY()+16)){
 			sp.setMoveVar(0);
 			sp.damage();
@@ -406,72 +444,72 @@ void Level::checksEnemy()  {
 			if(turtle[i].dead() !=0 && turtle[i].isHitLeft(blk[j].getXpos()+20, blk[j].getYpos())){
 				turtle[i].setMoveVar(-turtle[i].getMoveVar());
 			}
-		
+
 			if(turtle[i].dead() !=0 && turtle[i].isHitRight(blk[j].getXpos(), blk[j].getYpos())){
 				turtle[i].setMoveVar(-turtle[i].getMoveVar());
 			}
 		}
 		////////////////////////////////
-	
-	/*		for(int n = 0; n < numGoombas; n++){
-			
+
+		/*		for(int n = 0; n < numGoombas; n++){
+
 				if(turtle[i].dead() != 0 && turtle[i].isHitLeft(goomba[n].getX()+24, goomba[n].getY())){
 						if(turtle[i].dead() == 1) turtle[i].setPushed(true);
 						else turtle[i].setMoveVar(-turtle[i].getMoveVar());
 				}
-				
+
 			}*/
-			
-			//if in shell and is hit on the left by the previous turtles
-			for(int l = 0; l < numTurtles; l++){
-				if(turtle[i].dead() != 0 && turtle[i].isHitLeft(turtle[l].getX()+24, turtle[l].getY())){
-					if(turtle[i].dead() == 1) turtle[i].setPushed(true);
-					else turtle[i].setMoveVar(-turtle[i].getMoveVar());
-				}
+
+		//if in shell and is hit on the left by the previous turtles
+		for(int l = 0; l < numTurtles; l++){
+			if(turtle[i].dead() != 0 && turtle[i].isHitLeft(turtle[l].getX()+24, turtle[l].getY())){
+				if(turtle[i].dead() == 1) turtle[i].setPushed(true);
+				else turtle[i].setMoveVar(-turtle[i].getMoveVar());
 			}
-			
-	///////////////////////////////////////////////		
-				//if in shell and is hit on the right by the next turtles
+		}
+
+		///////////////////////////////////////////////
+		//if in shell and is hit on the right by the next turtles
 		for(int k = i+1; k < numTurtles; k++){
 			if(turtle[i].dead() != 0 && turtle[i].isHitRight(turtle[k].getX(), turtle[k].getY())){
 				if(turtle[i].dead() == 1) turtle[i].setPushed(true);
 				else turtle[i].setMoveVar(-turtle[i].getMoveVar());
 			}
 		}
-		
+
 		//if in shell and is hit on the right/left by goombas
 		for(int m = 0; m < numGoombas; m++){
 			if(turtle[i].dead() != 0 && turtle[i].isHitRight(goomba[m].getX(), goomba[m].getY())){
 				if(turtle[i].dead() == 1) turtle[i].setPushed(true);
 				else turtle[i].setMoveVar(-turtle[i].getMoveVar());
 			}
-			
+
 		}
-		
-	
+
+
 		////////////////////////////////
-		
+
 	}
-	
+
 }
 
 void Level::scrollScreen()  {
 
 	if(sp.getX() > 350)  {
 		mapDistMove += sp.getX() - 350;
-		
+
 		for(int i = 0; i < numBlocks; i++)  {
 			blk[i].setXpos(blk[i].getXpos() - sp.getX() + 350);
 		}
-		
+
 		for(int i = 0; i < numGoombas; i++)  {
 			goomba[i].setX(goomba[i].getX() - sp.getX() + 350);
 		}
-		
+
 		for(int i = 0; i < numTurtles; i++)  {
 			turtle[i].setX(turtle[i].getX() - sp.getX() + 350);
 		}
-		
+
 		sp.setX(350);
 	}
 

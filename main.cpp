@@ -7,12 +7,13 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "Level.h"
+#include "mainFunctions.h"
 
 using namespace std;
 
 int main (int argc, char* args[]) {//compatible with multiple platforms.
 	//bool endGame = false;
-/*
+	/*
 	if( !init() ){
 		printf( "Failed to initialize!\n" );
 	} else {
@@ -23,7 +24,7 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 
 			bool quit = false; //Main loop flag
 			SDL_Event e;//Event handler
-			
+
 			Sprite sp; //create sprite object
 			//Level lvl1;
 
@@ -54,7 +55,7 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 						}
 
 						break;
-						
+
 					case SDL_KEYUP:
 						if(e.key.keysym.sym == SDLK_LEFT)
 							sp.setMoveVar(0);
@@ -64,25 +65,26 @@ int main (int argc, char* args[]) {//compatible with multiple platforms.
 					}//end switch
 
 					if(endGame == true) quit = true; //if the game ends (treated as 1st level for now)
-					
+
 				}//end while
                                 sp.move();
 				sp.jump();
 				sp.display();
 			}//end while
-			
+
 			//display ending of level graphics
-			
-			
+
+
 		}//end inner if
 	}//end if
 
 	//Free resources and close SDL
 	close();
 	return 0;
-*/
+	 */
 
 	Level lvl;
+
 	lvl.playLevel();
 }
 
