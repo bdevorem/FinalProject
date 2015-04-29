@@ -1,0 +1,54 @@
+//Super Mario Bros
+//Tallis Bowers, Breanna Devore-McDonald, nicholascjones, Riley Reuvers
+//User Manual
+
+
+
+- General Report:
+	
+	*User Perspective:
+		From the user's perspective, this game is relatively simple. For more detail, look forward
+		under the "Controls and Instructions" section. This game is a sidescrolling platformer in
+		which the user plays as Mario, an Italian Plumber, and must defeat a series of enemies in
+		advancing towards the end of the level, which he reaches by walking, running, and jumping
+		towards the right side of the map. He can only do this through user control, and with the
+		help of an incredible leaping ability, a few conveniently (or inconveniently) placed bricks,
+		and mushrooms with magical powers.
+
+	*Programmer's Perspective:
+		From a programmer's perspective, this game takes a highly object-oriented approach to making
+		a game from scratch with only the help of the included SDL2 graphics library and a series of
+		sprite images, credit to an online user at arik239.deviantart.com . 
+
+
+-Special Library Inclusion:
+	For this project, as far as special downloads needed, one must include the SDL2 library for graphics
+	in order to build our game.
+
+-Instructions for Building and Compiling Program:
+	In order to compile our program, one must download all of the files from our our Github repository 
+	(https://github.com/bdevorem/FinalProject), and use the make command, which utilizes the Makefile we
+	created for the purposes of this project.
+
+-Controls and Instructions:
+	To play this game, the controls are relatively simple. The left and right arrow keys on the keyboard
+	allow the user to move left and right respectively, and the up arrow allows the user to jump in the air;
+	while in the air, they can move slowly left and right with the arrow keys as well. The main objective of
+	the game is for Mario (the protagonist) to move rightwards across the screen and make it to the end of
+	the level, which is the goal. Mario is opposed in his journey by a series of antagonists who, if they touch
+	him from the side, will kill him. In order to defeat these enemies, he must jump on them; the Goombas are
+	subject to death after one bounce, whereas it takes one bounce to send the Koopa into his shell, and a second
+	bounce to finish him off. If Mario gets a mushroom, he changes color and is able to take a hit of damage from
+	an enemy without dying. Lastly, Mario is able to land upon the brick blocks as platforms if need be.
+
+-Known Bugs:
+	* If a monster is randomly placed within a block obstacle, it will think that it is trapped between two walls
+		and continue to oscillate back and forth as if bounded by them.
+	* Sprites are rectangular in nature and in some cases, cause overlap over background or other sprites, particularly
+		the cloud sprites in the sky. This causes for some odd visual effects.
+	* Collisions between the enemies and each other, as well as obstacles, do not necessarily come into effect all of
+		the time; sometimes, the collision does not actually occur. We decided to let this remain in the game due
+		to the fact that it makes the game less predictable and moderately more challenging.
+	* Despite efforts to fix it, enemies still spawn between the end of level stairway and the flag. We decided to not
+		work towards changing this as the enemies in this location are not relevant and simply serve as scenery.
+	
