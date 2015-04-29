@@ -57,13 +57,15 @@ Turtle::Turtle() : Enemy() {
 void Turtle::moveTurtle() { //moves enemy
 	counter++;
 
-	if(moveVar == 1){
-		if(counter%5 == 0)//same speed as goomba
-			x -= 1;
-	}
-	else if(moveVar == -1)  {
-		if(counter%5 == 0)
-			x += 1;
+	if(alive == 2)  {
+		if(moveVar == 1){
+			if(counter%5 == 0)//same speed as goomba
+				x -= 1;
+		}
+		else if(moveVar == -1)  {
+			if(counter%5 == 0)
+				x += 1;
+		}
 	}
 }
 
