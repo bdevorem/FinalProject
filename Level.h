@@ -60,6 +60,9 @@ protected:
 
 	SDL_Rect srcRect;
 	SDL_Rect dstRect;
+
+	SDL_Rect flagRect;
+	SDL_Rect flagSrcRect;
 	int mapDistMove;
 	int go;
 
@@ -86,6 +89,14 @@ Level::Level() {
 	dstRect.y = 0;
 	dstRect.h = 1000;
 	dstRect.w = 1000;
+
+	flagRect.x = 3210;
+	flagRect.y = 0;
+
+	flagSrcRect.x = 0;
+	flagSrcRect.y = 0;
+	flagSrcRect.h = 328;
+	flagSrcRect.w = 47;
 
 	shroom[0].setX(700);
 	shroom[0].setY(10);
@@ -226,7 +237,7 @@ void Level::playLevel() {
 		} else {
 			SDL_Event e;//Event handler
 
-			while(sp.getAliveStatus() && sp.getX() < 3080 - mapDistMove && !quit)  {
+			while(sp.getAliveStatus() && sp.getX() < 3210 - mapDistMove && !quit)  {
 				while( SDL_PollEvent( &e ) != 0 ){//Handle events on queue
 
 					switch(e.type){
@@ -335,7 +346,6 @@ void Level::display() { //displays Sprite
 
 	SDL_Rect heroSrcRect = sp.getHeroSrcRect();
 	SDL_Rect heroRect = sp.getHeroRect();
-
 	for(int i = 0; i < numClouds; i++)  {
 		cloudRect[i].x = cloud[i].getX();
 		cloudRect[i].y = cloud[i].getY();
@@ -345,6 +355,7 @@ void Level::display() { //displays Sprite
 		cloudSrcRect[i].y = 0;
 		SDL_BlitSurface( cloudImage, &cloudSrcRect[i], gScreenSurface, &cloudRect[i] );
 	}
+	SDL_BlitSurface( flagImage, &flagSrcRect, gScreenSurface, &flagRect ); 
 
 	for(int i = 0; i < numShrooms; i++)  {
 		if(!gotShroom[i])  {
@@ -441,7 +452,7 @@ void Level::display() { //displays Sprite
 			}
 		}
 	}
-
+	
 	SDL_UpdateWindowSurface( gWindow );//Update the surface
 }
 
@@ -621,6 +632,7 @@ void Level::scrollScreen()  {
 		for(int i = 0; i < numClouds; i++)  {
 			cloud[i].setX(cloud[i].getX() - sp.getX() + 350);
 		}
+		flagRect.x = flagRect.x - sp.getX() + 350;
 		sp.setX(350);
 	}
 
