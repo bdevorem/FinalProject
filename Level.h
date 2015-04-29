@@ -257,7 +257,11 @@ void Level::playLevel() {
 				if(newGoomba == true){
 					newGoomba = false;
 					goomba[0].setNewGoomba(false);
-					numGoombas++;
+					
+					if(goomba[numGoombas].getX() - goomba[numGoombas-1].getX() > 30 || goomba[numGoombas].getX() - turtle[numTurtles-1].getX() > 30){
+						numGoombas++;
+					}
+					
 				}
 
 				for(int i = 0; i < numGoombas; i++)  {
@@ -269,7 +273,10 @@ void Level::playLevel() {
 				if(newTurtle == true){
 					newTurtle = false;
 					turtle[0].setNewTurtle(false);
-					numTurtles++;
+					
+					if(turtle[numTurtles].getX() - turtle[numTurtles-1].getX() > 30 || turtle[numTurtles].getX() - goomba[numGoombas-1].getX() > 30){
+						numTurtles++;
+					}
 				}
 
 				for(int i = 0; i < numTurtles; i++)  {
