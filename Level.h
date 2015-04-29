@@ -284,9 +284,14 @@ void Level::display() { //displays Sprite
 			SDL_BlitSurface( walkImage, &heroSrcRect, gScreenSurface, &heroRect );
 		else
 			SDL_BlitSurface( heroImage, &heroSrcRect, gScreenSurface, &heroRect );
-	}
-	else  {
-		SDL_BlitSurface( deadImage, &heroSrcRect, gScreenSurface, &heroRect );	// change this image to dead image eventually
+	} else  {
+		sp.setLives(sp.getLives()-1);
+		SDL_BlitSurface( deadImage, &heroSrcRect, gScreenSurface, &heroRect );	// he dead, change image to dead one
+		if (sp.getLives() == 0) {
+			//game over bruh, display screen
+		} else {
+			//display other screen
+		}
 	}
 
 	for(int i = 0; i < numBlocks; i++)  {
@@ -321,7 +326,7 @@ void Level::display() { //displays Sprite
 		turtleSrcRect[i].y = 0;
 		
 		
-		if(turtle[i].dead() == 2)//alive image
+		if(turtle[i].dead() == 2) //alive image
 			SDL_BlitSurface( turtleImage, &turtleSrcRect[i], gScreenSurface, &turtleRect[i] );
 		else if(turtle[i].dead() == 1) //in shell image
 			SDL_BlitSurface( shellImage, &turtleSrcRect[i], gScreenSurface, &turtleRect[i] );

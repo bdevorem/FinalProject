@@ -41,10 +41,13 @@ public:
 	int getMoveVar();
 	void resetJumpCounter();
 	bool getAliveStatus();
+	int getLives();
+	void setLives(int);
 
 
 private:
 	int moveVar;
+	int lives;
 	int jumpCounter;
 	int x; //x position of sprite
 	int y; //y position of sprite
@@ -65,6 +68,7 @@ private:
 Sprite::Sprite() { //default constructor
 	alive = true;
 	large = false;
+	lives = 3;
 	moveVar = 0;
 	x = 0;
 	y = 295;
@@ -218,4 +222,12 @@ void Sprite::resetJumpCounter()  {
 
 bool Sprite::getAliveStatus()  {
 	return alive;
+}
+
+void Sprite::setLives(int a) {
+	lives = a;
+}
+
+int Sprite::getLives() {
+	return lives;
 }
