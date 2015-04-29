@@ -1,0 +1,31 @@
+CSE 20212 Final Project – Meeting Log
+
+Tallis Bowers, Breanna Devore-McDonald, Nicholas Jones, Riley Reuvers
+
+1 March 2015, 7:00-8:00 – All Group Members Present
+	At this meeting, we simply got together for our first formal meeting as a group, given that we had made our initial project group through particular people, and Breanna and Riley met for the first time. We made our point to lay out our first major goal in the project timeline, learning our graphics skills. We all decided that we would take the time over spring break to do the LazyFoo tutorials and learn to use SDL to complete our project. We also decided that the scope of the project would likely be two Mario levels.
+
+16 March 2015, 1:00-1:30 – All Group Members Present
+	At this quick lunch meeting, our group got together to recap our progress over break on the SDL Tutorials; while we had not all completely finished them, everyone seemed to have a good understanding of the concepts necessary to finish our project. At this meeting, the group planned to meet again this upcoming weekend, with the goal of everyone having the tutorials totally finished. Additionally, we set our goal of having the program structure completely decided upon at the next meeting, and as such are going to spend this week brainstorming.
+
+21 March 2015, 6:00-8:00 – Breanna, and Nick were present
+	At our first meeting of over one hour, three members of the group met to lay out our formal program structure. We specifically tiered our priorities for the project into a few particular groupings of importance; we placed some of our initial ideas, such as the flying enemies and special bricks, into a category of being extra deliverables if we have enough time. Additionally, we made the inheritance hierarchy of our program classes. For the next week, we made the specific goals that Tallis would work on scrolling the screen right, Breanna would set the background, and Nick would attempt to get the sprite up and working.
+
+7 April 2015,  6:00-7:00 – Breanna, Nick present
+	At this meeting, we restructured the way the program was intended to run, deciding to emphasize composition in the level class, with a much more specific plan that is included in the Github repo. For the next week, we specifically assigned Riley to work on the motion of the sprite, Nick to program the structural skeleton of the new class layout, Tallis to work on the jump function, and Breanna to program the SDL functions in main.
+
+19 April 2015, 9:00-10:00 – All Members Present
+	At this meeting, we discussed the progress that we had made in our code over the last week and a half. Given the progress that made and tracked on Github, we planned most of our work of the next week. Specifically, Nick’s job is to continue to program the interaction between classes and begin the documentation process for the project, Breanna’s job is to specifically finish programming class functions, Tallis’s responsibility is to add block functions and change program structure, and Riley’s job is to include the images and do the graphical work for our progress.
+
+26 April 2015, 3:00-6:00 – Tallis and Nick Present
+	At this meeting, we spent the vast majority of the time coding in solidarity while occasionally leaning over to discuss our code with each other and crack a joke or two. Tallis’s primary responsibility was refining the block class and interfacing it with the main and level classes, focusing on the contact between the two surfaces. Nick’s primary responsibility was to work on the inheritance between the enemy, goomba, and turtle classes, and code the interplay between these and the level function. The plans for our actions following this meeting is to meet again tomorrow and continue working on these same functions.
+
+27 April 2015, 9:00-2:00AM – All Group Members Present
+	At this meeting, we simply coded and did more work on the project as we had planned, often working separately on various classes. Breanna spent the vast majority of her time re-working the enemy classes given some errors that had been included in functions and structure. Riley spent the majority of his time utilizing photoshop and creating and editing sprites for the class developments everyone had made. Tallis worked on the main program structure, particularly how the enemy classes and Mario interacted with level, as well as to include the mushroom class. Lastly, Nick spent the majority of his time working on the report and additional documentation.
+
+28 April 2015, 7:00-7:00AM – All Group Members Present
+	At this meeting, we had to finalize our project and heavily debug our code while adding the last embellishments that we had sought to include. Riley developed the scenery class and focused on the enemy sprites’ interactions in various situations, as well as performed all photoshopping and sprite development activities. Nick spent an extended period of time playing the game and debugging errors, particularly those involved with the interaction of enemies, blocks, and the scrolling of the screen, in addition to finishing the manual and helping Tallis with the structuring of his new classes, along with making the group’s PowerPoint for the presentation. Tallis developed the mushroom class and modified how Mario behaves, in addition to implementing the new hit points system and fixing the errors in the jump function, as well as adding level termination in a successful game run, as opposed to a death. Lastly, Breanna spent the vast majority of her time on level planning and modifying the spawn rates of the enemies, in addition to changing the behavior of the Koopa to cease motion upon death. She also removed some inheritance from the hierarchy in order to simplify some issues we had in programming. After this meeting, we plan to demonstrate our essentially finished project.
+
+
+
+
