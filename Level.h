@@ -354,7 +354,7 @@ void Level::display() { //displays Sprite
 		cloudSrcRect[i].h = cloud[i].getHeight();
 		cloudSrcRect[i].x = 0;
 		cloudSrcRect[i].y = 0;
-		if (flagRect.x - cloudRect[i].x <= 300) {
+		if (flagRect.x - cloudRect[i].x <= 300) { //if cloud is near the flag, move it so it's invisible
 			cloudRect[i].y = 400;
 		}
 		SDL_BlitSurface( cloudImage, &cloudSrcRect[i], gScreenSurface, &cloudRect[i] );

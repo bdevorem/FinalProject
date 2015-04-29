@@ -355,7 +355,7 @@ void Level::display() { //displays Sprite
 		cloudSrcRect[i].x = 0;
 		cloudSrcRect[i].y = 0;
 		if (flagRect.x - cloudRect[i].x <= 300) {
-			cloudRect[i].y = 300;
+			cloudRect[i].y = 400;
 		}
 		SDL_BlitSurface( cloudImage, &cloudSrcRect[i], gScreenSurface, &cloudRect[i] );
 	}
