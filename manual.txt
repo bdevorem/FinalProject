@@ -86,6 +86,8 @@
 		to the fact that it makes the game less predictable and moderately more challenging.
 	* Despite efforts to fix it, enemies still spawn between the end of level stairway and the flag. We decided to not
 		work towards changing this as the enemies in this location are not relevant and simply serve as scenery.
+	*If Mario jumps at a certain angle into the block, on the side, he takes a path that goes through the side of the block
+		rather than directly on top.
 
 Etc:
 	Github Repo: https://github.com/bdevorem/FinalProject
