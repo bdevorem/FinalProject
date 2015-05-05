@@ -1,0 +1,15 @@
+Tallis Bowers
+Professor Scott
+Fundamentals of Computing II
+2 May 2015
+Final Project Personal Report
+	Despite spending a majority of our time on the project towards the end
+of the time period allotted, our group worked well together and put in a good 
+number of man hours.  Each member of the team had his/her portion of the 
+project to do, and each of us did our jobs well.  It is clear by our GitHub 
+repository.s commits that each of us worked a good amount on the project.  My 
+account, however had trouble recognizing when a commit was mine, so most of my
+work was not documented on my commit chart.  The list of total commits should 
+show, however, that I did commit quite a few significant changes to the 
+Level.h, Sprite.h, Mushroom.h, and Block.h files.
+
